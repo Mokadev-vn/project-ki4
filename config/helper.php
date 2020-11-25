@@ -4,9 +4,9 @@ use Core\DB;
 use Core\Library\MailSend;
 
 const APP_CONFIG = [
-    'url' => 'http://localhost/project/',
-    'static' => 'http://localhost/project/resources/static/',
-    'uploads' => 'http://localhost/project/uploads/',
+    'url' => 'http://localhost/project-ki4/',
+    'static' => 'http://localhost/project-ki4/resources/static/',
+    'uploads' => 'http://localhost/project-ki4/uploads/',
 ];
 
 // const MAIL_CONFIG = [
@@ -68,7 +68,7 @@ function view($name, $data = [])
 
 function csrf_field()
 {
-    echo '<input type="hidden" name="csrf_token" id="csrf_token" value="' . csrf_token() . '">';
+    echo '<input type="hidden" name="csrf_token" class="csrf_token" value="' . csrf_token() . '">';
 }
 
 function csrf_token()
