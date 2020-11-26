@@ -11,7 +11,7 @@ class DB{
     {
         if (count(self::$config)) {
             try {
-                $dns = "mysql:dbname=" . self::$config['dbname'] . ";host=" . self::$config['host'].";charset=".self::$config['charset'];
+                $dns = "mysql:dbname=" . self::$config['dbname'] . ";host=" . self::$config['host'].":".self::$config['port'].";charset=".self::$config['charset'];
                 $username = self::$config['username'];
                 $password = self::$config['password'];
                 return new PDO($dns, $username, $password);
