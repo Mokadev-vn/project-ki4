@@ -55,8 +55,6 @@ class HomeController extends Controller
                     'username'  => $data['username'],
                     'role'      => $data['role'],
                     'email'     => $data['email'],
-                    'full_name' => $data['full_name'],
-                    'image'     => $data['image'],
                 ];
                 setSession('user', $infoUser);
 
@@ -72,7 +70,8 @@ class HomeController extends Controller
         return;
     }
 
-    public function register() {
+    public function register()
+    {
         $result = [
             'status' => 'error',
             'message' => '',
@@ -80,5 +79,57 @@ class HomeController extends Controller
         ];
 
         $csrf_token = request('csrf_token');
+        $username = request('username');
+        $phone = request('phone');
+        $email = request('email');
+        $role = (request('role') === '') ? request('role') : 1;
+        $password = request('password');
+
+        if (!csrf_verify($csrf_token)) {
+            $result['message'] = 'Có lỗi xảy ra!';
+            echo json_encode($result);
+            return;
+        }
+
+        if (!$username) {
+            $result['error']['username'] = 'Bạn chưa nhập trường này!';
+        }
+        if (!$phone) {
+            $result['error']['phone'] = 'Bạn chưa nhập trường này!';
+        }
+
+        if (!$email) {
+            $result['error']['email'] = 'Bạn chưa nhập trường này!';
+        }
+        if (!$password) {
+            $result['error']['password'] = 'Bạn chưa nhập trường này!';
+        }
+
+
+        if ($result['error']) {
+            echo json_encode($result);
+            return;
+        }
+
+        $password = password_hash($password, PASSWORD_BCRYPT);
+
+        $user = new User();
+        $user->username = $username;
+        $user->email = $email;
+        $user->fullname = "";
+        $user->password = $password;
+        $user->role = $role;
+        $user->phone = $phone;
+
+        if ($user->save()) {
+            $result['status'] = 'success';
+            $result['message'] = 'Đăng Kí Thành Công!';
+            echo json_encode($result);
+            return;
+        }
+
+        $result['message'] = 'Có lỗi xảy ra vui lòng thử lại!';
+        echo json_encode($result);
+        return;
     }
 }

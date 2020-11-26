@@ -46,12 +46,14 @@ class Model
 
         $this->query         = "INSERT INTO " . $this->table . "(" . trim($fields, ',') . ") VALUES (" . trim($values, ',') . ")";
         
+
         $stmt                = $this->connect->prepare($this->query);
         $status              = $stmt->execute($bindData);
         $this->rowCount      = $stmt->rowCount();
         $this->lastError     = $stmt->errorInfo();
         $this->lastErrorCode = $stmt->errorCode();
         $this->reset();
+
 
 
         if ($status && $this->connect->lastInsertId() > 0) {

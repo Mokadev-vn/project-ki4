@@ -215,7 +215,7 @@
                                         <h3 class="text-center">Quick Login</h3>
                                         <p class="text-center">Don't have an account? <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sign Up!</a></p>
                                     </div>
-                                    <div id="message"></div>
+                                    <div id="message-login"></div>
                                     <div class="form-group">
                                         <span class="text-danger" id="error-loginEmail"></span>
                                         <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" require>
@@ -240,8 +240,9 @@
                                     <h3 class="text-center">Create New Account</h3>
                                     <p class="text-center">I have a account? <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Login</a></p>
                                 </div>
-                                <form action="#">
+                                <form onsubmit="return false;">
                                     <?php csrf_field(); ?>
+                                    <div id="message-register"></div>
                                     <div class="form-group">
                                         <span class="text-danger" id="error-username"></span>
                                         <input type="text" class="form-control" id="username" placeholder="User Name">
@@ -265,19 +266,19 @@
                                     </div> -->
                                     <div class="form-group">
                                         <select id="role" class="form-control">
-                                            <option selected>Select Sector</option>
                                             <option value="1">Member</option>
                                             <option value="2">Employer</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                        <span class="text-danger" id="error-password"></span>
+                                        <input type="password" class="form-control" id="password" placeholder="Password">
                                     </div>
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck2">
                                         <label class="form-check-label" for="exampleCheck2">By Registering You Confirm That You Accept <a class="text-thm" href="page-terms-and-policies.html">Terms & Conditions</a> And <a class="text-thm" href="page-terms-and-policies.html">Privacy Policy</a></label>
                                     </div>
-                                    <button class="btn btn-log btn-block btn-dark">Register</button>
+                                    <button class="btn btn-log btn-block btn-dark" id="register">Register</button>
 
                                 </form>
                             </div>
