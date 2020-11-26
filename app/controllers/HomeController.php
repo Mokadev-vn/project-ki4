@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Core\Controller;
 use App\Models\User;
 use App\Models\Job;
-use Core\Models\Company;
+use App\Models\Company;
 
 class HomeController extends Controller
 {
