@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $job = new Job();
-
+        
         return $this->view('home');
     }
 
