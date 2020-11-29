@@ -1,11 +1,17 @@
 <?php layout('layout.header'); ?>
+
+
+
 	<!-- Home Design -->
 	<section class="home-one style3 parallax home_bg3" data-stellar-background-ratio="0.3">
 		<div class="container">
 			<div class="row home-content">
 				<div class="col-lg-8">
 					<div class="home-text">
-						<h2 class="fz40">Find The Job That Fits Your Life</h2>
+						<h2 class="fz40">
+						Find The Job That Fits Your Life
+				
+						</h2>
 						<p class="color-white">Each month, more than 7 million jobseekers turn to website in their search for work, making over 160,000 applications every day.</p>
 					</div>
 				</div>
@@ -41,27 +47,29 @@
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="ulockd-main-title">
-						<h3 class="mt0">Featured Jobs</h3>
+						<h3 class="mt0">Việc làm nổi bật</h3>
 					</div>
 				</div>
 			</div>
 			<div class="row">
+	<?php foreach($jobs as $rowjobs): ?>
 				<div class="col-sm-6 col-lg-12">
 					<div class="fj_post home3">
 						<div class="details">
 							<div class="thumb fn-smd">
 								<img class="img-fluid" src="images/partners/2.jpg" alt="2.jpg">
 							</div>
-							<h4>General Ledger Accountant</h4>
-							<p>Posted 23 August by <a class="text-thm3" href="#">Robert Half Finance & Accounting</a></p>
+							<h4>ooô<?=$rowjobs['title']?></h4>
+							<p><?=$rowjobs['create_at']?> <a class="text-thm3" href="#">Robert Half Finance & Accounting</a></p>
 							<ul class="featurej_post">
-								<li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#">RG40, Wokingham</a></li>
-								<li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#">$13.00 - $18.00 per hour</a></li>
+								<li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#"><?= $rowjobs['city']?></a></li>
+								<li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#"><?= $rowjobs['offerd_salary']?></a></li>
 							</ul>
 						</div>
 						<a class="btn btn-md btn-transparent2 float-right fn-smd" href="#">Browse Job</a>
 					</div>
 				</div>
+	<?php endforeach; ?> 
 				<div class="col-sm-6 col-lg-12">
 					<div class="fj_post home3">
 						<div class="details">
