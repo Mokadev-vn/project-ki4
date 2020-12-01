@@ -1,6 +1,5 @@
 <?php layout('layout.header'); ?>
-	<!-- Home Design -->
-	<section class="home-one style3 parallax home_bg3" data-stellar-background-ratio="0.3">
+<section class="home-one style3 parallax home_bg3" data-stellar-background-ratio="0.3">
 		<div class="container">
 			<div class="row home-content">
 				<div class="col-lg-8">
@@ -34,7 +33,6 @@
 			</div>
 		</div>
 	</section>
-
 	<!-- Features Job List Design -->
 	<section class="popular-job">
 		<div class="container">

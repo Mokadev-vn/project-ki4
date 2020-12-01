@@ -1,4 +1,5 @@
 <?php
+session_name('x_session');
 session_start();
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
@@ -18,8 +19,8 @@ spl_autoload_register(function (string $class) {
     }
 });
 
-// set_error_handler(function () {
-//     echo '';
+// set_error_handler(function ($data) {
+//     echo $data;
 // });
 
 require_once 'config/helper.php';

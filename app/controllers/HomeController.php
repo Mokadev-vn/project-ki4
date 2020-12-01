@@ -136,4 +136,8 @@ class HomeController extends Controller
         echo json_encode($result);
         return;
     }
+
+    public function pageLogin(){
+        return $this->view('log-reg');
+    }
 }
