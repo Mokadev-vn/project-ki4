@@ -19,9 +19,9 @@ class HomeController extends Controller
 
         $job = new Job();
         
-        $listjob = $job->get();
+        $listjob = $job->limit(5)->get();
         
-        return $this->view('home', ['jobs' => $listjob],['companys' => $listcompany] );
+        return $this->view('home', ['jobs' => $listjob,'companys' => $listcompany] );
     }
 
     public function login()
