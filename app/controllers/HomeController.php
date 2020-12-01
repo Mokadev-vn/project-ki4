@@ -11,10 +11,17 @@ class HomeController extends Controller
 {
 
     public function index()
-    {
-        $job = new Job();
 
-        return $this->view('home');
+    {   $company = new Company();
+        
+        $listcompany = $company->get();
+
+
+        $job = new Job();
+        
+        $listjob = $job->limit(5)->get();
+        
+        return $this->view('home', ['jobs' => $listjob,'companys' => $listcompany] );
     }
 
     public function login()
