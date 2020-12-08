@@ -13,7 +13,7 @@
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>css/responsive.css">
     <!-- Title -->
-    <title>CareerUp - The Most Popular Job Board HTML Template</title>
+    <title>CareerUp - Search Works</title>
     <!-- Favicon -->
     <link href="<?= APP_CONFIG['static'] ?>images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
     <link href="<?= APP_CONFIG['static'] ?>images/favicon.ico" sizes="128x128" rel="shortcut icon" />
@@ -45,144 +45,22 @@
                     <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
                     <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
                         <li>
-                            <a href="#"><span class="title">Home</span></a>
-                            <!-- Level Two-->
-                            <ul>
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index2.html">Home 2</a></li>
-                                <li><a href="index3.html">Home 3</a></li>
-                                <li><a href="index4.html">Home 4</a></li>
-                                <li><a href="index5.html">Home 5</a></li>
-                                <li><a href="index6.html">Home 6</a></li>
-                            </ul>
+                            <a href="<?= APP_CONFIG['url'] ?>"><span class="title">Home</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">Find A Job</span></a>
-                            <!-- Level Two-->
-                            <ul>
-                                <li>
-                                    <a href="#">Job List</a>
-                                    <ul>
-                                        <li><a href="page-job-list-v1.html">List V1</a></li>
-                                        <li><a href="page-job-list-v2.html">List V2</a></li>
-                                        <li><a href="page-job-list-v3.html">List V3</a></li>
-                                        <li><a href="page-job-list-v4.html">List V4</a></li>
-                                        <li><a href="page-job-list-v5.html">List V5</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Job Single</a>
-                                    <ul>
-                                        <li><a href="page-job-single-v1.html">Single V1</a></li>
-                                        <li><a href="page-job-single-v2.html">Single V2</a></li>
-                                        <li><a href="page-job-single-v3.html">Single V3</a></li>
-                                        <li><a href="page-job-single-v4.html">Single V4</a></li>
-                                        <li><a href="page-job-single-v5.html">Single V5</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href=""><span class="title">Works</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">Employer</span></a>
-                            <!-- Level Two-->
-                            <ul>
-                                <li>
-                                    <a href="#">Employer List</a>
-                                    <!-- Level Three-->
-                                    <ul>
-                                        <li><a href="page-employer-list-v1.html">List V1</a></li>
-                                        <li><a href="page-employer-list-v2.html">List V2</a></li>
-                                        <li><a href="page-employer-list-v3.html">List V3</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Employer Single</a>
-                                    <!-- Level Three-->
-                                    <ul>
-                                        <li><a href="page-employer-single-v1.html">Single V1</a></li>
-                                        <li><a href="page-employer-single-v2.html">Single V2</a></li>
-                                        <li><a href="page-employer-single-v3.html">Single V3</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Employer Admin</a>
-                                    <!-- Level Three-->
-                                    <ul>
-                                        <li><a href="page-employer-dashboard.html">Dashboard</a></li>
-                                        <li><a href="page-employer-profile.html">Profile</a></li>
-                                        <li><a href="page-employer-post-job.html">Post Job</a></li>
-                                        <li><a href="page-employer-manage-job.html">Manage Job</a></li>
-                                        <li><a href="page-employer-resume.html">Resume</a></li>
-                                        <li><a href="page-employer-packages.html">Packages</a></li>
-                                        <li><a href="page-employer-transactions.html">Transactions</a></li>
-                                        <li><a href="page-employer-change-password.html">Change Password</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href=""><span class="title">Employer</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">Candidates</span></a>
-                            <ul>
-                                <li>
-                                    <a href="#">Candidates List</a>
-                                    <ul>
-                                        <li><a href="page-candidates-list-v1.html">List V1</a></li>
-                                        <li><a href="page-candidates-list-v2.html">List V2</a></li>
-                                        <li><a href="page-candidates-list-v3.html">List V3</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Candidates Single</a>
-                                    <ul>
-                                        <li><a href="page-candidates-single-v1.html">Single v1</a></li>
-                                        <li><a href="page-candidates-single-v2.html">Single v2</a></li>
-                                        <li><a href="page-candidates-single-v3.html">Single v3</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Candidates Admin</a>
-                                    <ul>
-                                        <li><a href="page-candidates-dashboard.html">Dashboard</a></li>
-                                        <li><a href="page-candidates-profile.html">Profile</a></li>
-                                        <li><a href="page-candidates-my-resume.html">My Resume</a></li>
-                                        <li><a href="page-candidates-applied-jobs.html">Applied Jobs</a></li>
-                                        <li><a href="page-candidates-cv-manager.html">Cv Manager</a></li>
-                                        <li><a href="page-candidates-favourite-jobs.html">Favourite Jobs</a></li>
-                                        <li><a href="page-candidates-message.html">Message</a></li>
-                                        <li><a href="page-candidates-review.html">Review</a></li>
-                                        <li><a href="page-candidates-job-alert.html">Job Alert</a></li>
-                                        <li><a href="page-candidates-change-password.html">Change Password</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="#"><span class="title">About Us</span></a>
                         </li>
-                        <li>
-                            <a href="#"><span class="title">Pages</span></a>
-                            <ul>
-                                <li><a href="page-about.html">About</a></li>
-                                <li>
-                                    <a href="#"><span class="title">Blog</span></a>
-                                    <ul>
-                                        <li><a href="page-blog-v1.html">Page Blog v1</a></li>
-                                        <li><a href="page-blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="page-blog-list.html">Blog List</a></li>
-                                        <li><a href="page-blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="page-contact.html">Contact Us</a></li>
-                                <li><a href="page-error.html">404</a></li>
-                                <li><a href="page-faq.html">Faq</a></li>
-                                <li><a href="page-how-it-works.html">How It Works</a></li>
-                                <li><a href="page-invoice.html">Invoice</a></li>
-                                <li><a href="page-log-reg.html">Login/Register</a></li>
-                                <li><a href="page-pricing.html">Pricing</a></li>
-                                <li><a href="page-terms-and-policies.html">Terms And Policies</a></li>
-                                <li><a href="page-ui-element.html">UI Elements</a></li>
-                            </ul>
-                        </li>
+                        <?php if (getSession('user')['role'] == 2): ?>
                         <li class="last">
                             <a href="page-employer-post-job.html"><span class="title">Post a Job</span></a>
                         </li>
+                        <?php endif; ?>
                     </ul>
                     <?php if (!getSession('user')) : ?>
                         <ul class="sign_up_btn pull-right dn-smd">
@@ -252,10 +130,10 @@
                             </li>
                             <li class="user_setting">
                                 <div class="dropdown">
-                                    <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" src="images/team/e1.png" alt="e1.png"> <span class="pl15 pr15"><?= getSession('user')['username'] ?></span></a>
+                                    <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" src="<?= APP_CONFIG['uploads']. ((getSession('user')['avatar']) ? getSession('user')['avatar'] : 'avatar.png') ?>" alt=""> <span class="pl15 pr15"><?= getSession('user')['fullname'] ?></span></a>
                                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 68px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         <div class="user_set_header">
-                                            <p>Hi, <?= getSession('user')['username'] ?></p>
+                                            <p>Hi, <?= getSession('user')['fullname'] ?></p>
                                         </div>
                                         <div class="user_setting_content">
                                             <a class="dropdown-item active" href="page-employer-dashboard.html"><span class="flaticon-dashboard"></span> Dashboard</a>
@@ -371,7 +249,7 @@
         <div id="page" class="stylehome1 h0">
             <div class="mobile-menu">
                 <div class="header stylehome1 home3">
-                    <img class="nav_logo_img img-fluid float-left mt25" src="images/header-logo3.png" alt="header-logo3.png">
+                    <img class="nav_logo_img img-fluid float-left mt25" src="<?= APP_CONFIG['static'] ?>images/header-logo3.png" alt="header-logo3.png">
                     <a class="bgc-darkblue" href="#menu"><span></span></a>
                 </div>
             </div><!-- /.mobile-menu -->
