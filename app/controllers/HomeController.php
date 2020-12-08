@@ -10,18 +10,18 @@ use App\Models\Company;
 class HomeController extends Controller
 {
 
-    public function index()
-
-    {   $company = new Company();
+    public function index(){   
+        // $company = new Company();
         
-        $listcompany = $company->get();
+        // $listcompany = $company->get();
 
 
-        $job = new Job();
+        // $job = new Job();
         
-        $listjob = $job->limit(5)->get();
+        // $listjob = $job->limit(5)->get();
         
-        return $this->view('home', ['jobs' => $listjob,'companys' => $listcompany] );
+        // return $this->view('home', ['jobs' => $listjob,'companys' => $listcompany] );
+        return $this->view('home');
     }
 
     public function login()
@@ -64,6 +64,8 @@ class HomeController extends Controller
                 $infoUser = [
                     'id'        => $data['id'],
                     'username'  => $data['username'],
+                    'fullname'  => $data['fullname'], 
+                    'avatar'    => $data['avatar'],
                     'role'      => $data['role'],
                     'email'     => $data['email'],
                 ];

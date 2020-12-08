@@ -6,7 +6,6 @@ use App\Models\User;
 class AccountController extends Controller{
 
     public function index(){
-
         return $this->view('user.dashboard');
     }
 

@@ -1,14 +1,4 @@
 <?php layout('layout.header'); ?>
-<<<<<<< HEAD
-<section class="home-one style3 parallax home_bg3" data-stellar-background-ratio="0.3">
-		<div class="container">
-			<div class="row home-content">
-				<div class="col-lg-8">
-					<div class="home-text">
-						<h2 class="fz40">Find The Job That Fits Your Life</h2>
-						<p class="color-white">Each month, more than 7 million jobseekers turn to website in their search for work, making over 160,000 applications every day.</p>
-					</div>
-=======
 
 
 
@@ -23,7 +13,6 @@
 
 					</h2>
 					<p class="color-white">Each month, more than 7 million jobseekers turn to website in their search for work, making over 160,000 applications every day.</p>
->>>>>>> c914097d5511a73050e1e2f82cd344f4a152b104
 				</div>
 			</div>
 			<div class="col-lg-12">
@@ -49,17 +38,6 @@
 				<p class="color-white">Trending Keywords: DesignCer, Developer, Web, IOS, PHP, Senior, Engineer</p>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</section>
-	<!-- Features Job List Design -->
-	<section class="popular-job">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="ulockd-main-title">
-						<h3 class="mt0">Featured Jobs</h3>
-					</div>
-=======
 	</div>
 </section>
 
@@ -70,7 +48,6 @@
 			<div class="col-lg-12 text-center">
 				<div class="ulockd-main-title">
 					<h3 class="mt0">Việc làm nổi bật</h3>
->>>>>>> c914097d5511a73050e1e2f82cd344f4a152b104
 				</div>
 			</div>
 		</div>

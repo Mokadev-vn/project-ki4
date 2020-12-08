@@ -16,7 +16,9 @@ $(document).ready(function () {
     $("#message-login").html("");
 
     postData("login", data).then(function (data) {
-      console.log(data);
+      if(data.status == "success"){
+        window.location.href = (data.role == 3) ? URL+'admin' : URL+'user';
+      }
     });
   });
 
@@ -27,6 +29,7 @@ $(document).ready(function () {
     let email = $("#email").val();
     let password = $("#password").val();
     let role = $("#role").val();
+    let check = $("#check")[0];
 
     let data ={
       csrf_token,
@@ -36,15 +39,23 @@ $(document).ready(function () {
       password,
       role
     }
+    
 
     $("#error-username").html("");
     $("#error-phone").html("");
     $("#error-email").html("");
     $("#error-password").html("");
     $("#message-register").html("");
+    $("#error-check").html("");
+    if(!check.checked){
+      $("#error-check").text("Please check input");
+      return;
+    }
 
     postData('register', data).then(function(data) {
-      console.log(data);
+      if(data.status === 'success'){
+        window.location.reload();
+      }
     })
   });
 });
