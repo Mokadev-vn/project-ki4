@@ -56,14 +56,15 @@ class HomeController extends Controller
         }
 
         $user = new User();
-        $data = $user->where('username', strtolower($username))->where('email', $username, '=', 'OR')->getOne();
+        //$data = $user->where('username', strtolower($username))->where('email', $username, '=', 'OR')->getOne();
+        $data = $user->where('email', $username)->getOne();
+
         $data = (is_array($data)) ? $data : [];
 
         if (count($data) != 0) {
             if (password_verify($password, $data['password'])) {
                 $infoUser = [
                     'id'        => $data['id'],
-                    'username'  => $data['username'],
                     'fullname'  => $data['fullname'], 
                     'avatar'    => $data['avatar'],
                     'role'      => $data['role'],
@@ -78,6 +79,30 @@ class HomeController extends Controller
                 return;
             }
         }
+
+        $company = new Company();
+        $data = $company->where('email', $username)->getOne();
+        $data = (is_array($data)) ? $data : [];
+
+        if (count($data) != 0) {
+            if (password_verify($password, $data['password'])) {
+                $infoUser = [
+                    'id'        => $data['id'],
+                    'fullname'  => $data['name'], 
+                    'avatar'    => $data['avatar'],
+                    'role'      => 2,
+                    'email'     => $data['email'],
+                ];
+                setSession('user', $infoUser);
+
+                $result['status'] = 'success';
+                $result['message'] = 'Đăng Nhập Thành Công!';
+                $result['role'] = 2;
+                echo json_encode($result);
+                return;
+            }
+        }
+
         $result['message'] = 'Thông tin tài khoản mật khẩu không chính xác!';
         echo json_encode($result);
         return;
@@ -92,10 +117,10 @@ class HomeController extends Controller
         ];
 
         $csrf_token = request('csrf_token');
-        $username = request('username');
+        $fullname = request('fullname');
         $phone = request('phone');
         $email = request('email');
-        $role = (request('role') === '') ? request('role') : 1;
+        $role = (request('role') === '') ? 1 : request('role');
         $password = request('password');
 
         if (!csrf_verify($csrf_token)) {
@@ -104,8 +129,8 @@ class HomeController extends Controller
             return;
         }
 
-        if (!$username) {
-            $result['error']['username'] = 'Bạn chưa nhập trường này!';
+        if (!$fullname) {
+            $result['error']['fullname'] = 'Bạn chưa nhập trường này!';
         }
         if (!$phone) {
             $result['error']['phone'] = 'Bạn chưa nhập trường này!';
@@ -126,27 +151,49 @@ class HomeController extends Controller
 
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        $user = new User();
-        $user->username = $username;
-        $user->email = $email;
-        $user->fullname = "";
-        $user->password = $password;
-        $user->role = $role;
-        $user->phone = $phone;
+        if($role == 1){
+            $user = new User();
+            $user->fullname = $fullname;
+            $user->email = $email;
+            $user->password = $password;
+            $user->role = $role;
+            $user->phone = $phone;
+    
+            if ($user->save()) {
+                $result['status'] = 'success';
+                $result['message'] = 'Đăng Kí Thành Công!';
+                echo json_encode($result);
+                return;
+            }
+        }
 
-        if ($user->save()) {
-            $result['status'] = 'success';
-            $result['message'] = 'Đăng Kí Thành Công!';
-            echo json_encode($result);
-            return;
+        if($role == 2){
+            $company = new Company();
+            $company->name = $fullname;
+            $company->email = $email;
+            $company->password = $password;
+            $company->phone = $phone;
+
+            if($company->save()){
+                $result['status'] = 'success';
+                $result['message'] = 'Đăng Kí Thành Công!';
+                echo json_encode($result);
+                return;
+            }
         }
 
         $result['message'] = 'Có lỗi xảy ra vui lòng thử lại!';
         echo json_encode($result);
         return;
+
     }
 
-    public function pageLogin(){
-        return $this->view('log-reg');
+    public function logout()
+    {
+        if (destroySession('user')) {
+            redirect('');
+        }
     }
+
+
 }

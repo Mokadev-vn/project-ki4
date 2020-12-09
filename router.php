@@ -15,6 +15,9 @@ $router->middleware('AuthAdmin')->group('/admin',[
 
 $router->get('/list-job', 'App\Controllers\JobController@index');
 
-$router->middleware('checkLogin')->get('/user', 'App\Controllers\User\AccountController@index');
+$router->middleware('checkLogin')->get('/dashboard', 'App\Controllers\User\AccountController@index');
+$router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountController@profile');
+$router->middleware('User')->post('/user-profile', 'App\Controllers\User\AccountController@postProfile');
+$router->get('/logout', 'App\Controllers\HomeController@logout');
 
 $router->execute();

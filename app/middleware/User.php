@@ -2,10 +2,10 @@
 namespace App\Middleware;
 use Core\App;
 
-class AuthAdmin{
+class User{
     public function handle()
     {
-        if (!App::getSession('user') && App::getSession('user')['role'] != 3) {
+        if (!App::getSession('user') && App::getSession('user')['role'] != 1) {
             App::redirect('');
             return false;
         }

@@ -17,14 +17,14 @@ $(document).ready(function () {
 
     postData("login", data).then(function (data) {
       if(data.status == "success"){
-        window.location.href = (data.role == 3) ? URL+'admin' : URL+'user';
+        window.location.href = (data.role == 3) ? URL+'admin' : URL+'dashboard';
       }
     });
   });
 
   $("#register").click(function () {
     let csrf_token = $(".csrf_token").val();
-    let username = $("#username").val();
+    let fullname = $("#fullname").val();
     let phone = $("#phone").val();
     let email = $("#email").val();
     let password = $("#password").val();
@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     let data ={
       csrf_token,
-      username,
+      fullname,
       phone,
       email,
       password,
@@ -41,7 +41,7 @@ $(document).ready(function () {
     }
     
 
-    $("#error-username").html("");
+    $("#error-fullname").html("");
     $("#error-phone").html("");
     $("#error-email").html("");
     $("#error-password").html("");

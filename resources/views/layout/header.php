@@ -56,7 +56,7 @@
                         <li>
                             <a href="#"><span class="title">About Us</span></a>
                         </li>
-                        <?php if (getSession('user')['role'] == 2): ?>
+                        <?php if (isset(getSession('user')['role']) && getSession('user')['role'] == 2): ?>
                         <li class="last">
                             <a href="page-employer-post-job.html"><span class="title">Post a Job</span></a>
                         </li>
@@ -136,16 +136,9 @@
                                             <p>Hi, <?= getSession('user')['fullname'] ?></p>
                                         </div>
                                         <div class="user_setting_content">
-                                            <a class="dropdown-item active" href="page-employer-dashboard.html"><span class="flaticon-dashboard"></span> Dashboard</a>
-                                            <a class="dropdown-item" href="page-employer-profile.html"><span class="flaticon-profile"></span> Company Profile</a>
-                                            <a class="dropdown-item" href="page-employer-post-job.html"><span class="flaticon-resume"></span> Post a New Job</a>
-                                            <a class="dropdown-item" href="page-employer-manage-job.html"><span class="flaticon-paper-plane"></span> Manage Jobs</a>
-                                            <a class="dropdown-item" href="page-employer-resume.html"><span class="flaticon-analysis"></span> Shortlisted Resumes</a>
-                                            <a class="dropdown-item" href="page-employer-packages.html"><span class="flaticon-favorites"></span> Packages</a>
-                                            <a class="dropdown-item" href="page-employer-transactions.html"><span class="flaticon-chat"></span> Transactions</a>
-                                            <a class="dropdown-item" href="page-candidates-change-password.html"><span class="flaticon-locked"></span> Change Password</a>
-                                            <a class="dropdown-item" href="page-log-reg.html"><span class="flaticon-logout"></span> Logout</a>
-                                            <a class="dropdown-item" href="#"><span class="flaticon-rubbish-bin"></span> Delete Profile</a>
+                                            <a class="dropdown-item active" href="<?= APP_CONFIG['url'] ?>dashboard"><span class="flaticon-dashboard"></span> Dashboard</a>
+                                            <a class="dropdown-item" href="<?= APP_CONFIG['url'] ?>change-password"><span class="flaticon-locked"></span> Change Password</a>
+                                            <a class="dropdown-item" href="<?= APP_CONFIG['url'] ?>logout"><span class="flaticon-logout"></span> Logout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -210,8 +203,8 @@
                                         <?php csrf_field(); ?>
                                         <div id="message-register"></div>
                                         <div class="form-group">
-                                            <span class="text-danger" id="error-username"></span>
-                                            <input type="text" class="form-control" id="username" placeholder="User Name">
+                                            <span class="text-danger" id="error-fullname"></span>
+                                            <input type="text" class="form-control" id="fullname" placeholder="Full Name">
                                         </div>
                                         <div class="form-group">
                                             <span class="text-danger" id="error-email"></span>
