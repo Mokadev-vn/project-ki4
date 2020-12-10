@@ -8,6 +8,10 @@ class CompanyController extends Controller{
     public function profile(){
         return $this->view('user.profile-company');
     }
+    
+    public function postProfile(){
+        
+    }
 
 
 

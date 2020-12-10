@@ -21,6 +21,7 @@ $router->middleware('User')->post('/user-profile', 'App\Controllers\User\Account
 
 $router->middleware('Company')->get('/post-job', 'App\Controllers\HomeController@postJob');
 $router->middleware('Company')->get('/company-profile', 'App\Controllers\User\CompanyController@profile');
+$router->middleware('Company')->post('/company-profile', 'App\Controllers\User\AccountController@postProfile');
 
 $router->get('/logout', 'App\Controllers\HomeController@logout');
 
