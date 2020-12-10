@@ -195,5 +195,9 @@ class HomeController extends Controller
         }
     }
 
+    public function postJob(){
+        return $this->view('user.post-job');
+    }
+
 
 }

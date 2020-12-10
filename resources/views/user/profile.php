@@ -34,8 +34,8 @@
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="my_profile_input form-group">
-                                    <label for="inputUsername">Username</label>
-                                    <input type="text" class="form-control" id="inputUsername" value="" disabled>
+                                    <label for="inputUsername">Role</label>
+                                    <input type="text" class="form-control" id="inputUsername" value="<?= ($infoUser['role']==1) ? 'Member' : 'Admin' ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">

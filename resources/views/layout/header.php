@@ -58,7 +58,7 @@
                         </li>
                         <?php if (isset(getSession('user')['role']) && getSession('user')['role'] == 2): ?>
                         <li class="last">
-                            <a href="page-employer-post-job.html"><span class="title">Post a Job</span></a>
+                            <a href="<?= APP_CONFIG['url'] ?>post-job"><span class="title">Post a Job</span></a>
                         </li>
                         <?php endif; ?>
                     </ul>
