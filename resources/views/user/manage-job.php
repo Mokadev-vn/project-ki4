@@ -13,7 +13,7 @@
                         <div class="icon_boxs">
                             <div class="icon"><span class="flaticon-work"></span></div>
                             <div class="details">
-                                <h4>2 Job Posted</h4>
+                                <h4><?= $headJob['total_job'] ?> Job Posted</h4>
                             </div>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                         <div class="icon_boxs">
                             <div class="icon style2"><span class="flaticon-resume"></span></div>
                             <div class="details">
-                                <h4>3 Applications</h4>
+                                <h4><?= $headJob['total_app'] ?> Applications</h4>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="icon_boxs">
                             <div class="icon style3"><span class="flaticon-work"></span></div>
                             <div class="details">
-                                <h4>1 Active Jobs</h4>
+                                <h4><?= $headJob['total_active'] ?> Active Jobs</h4>
                             </div>
                         </div>
                     </div>
@@ -79,9 +79,9 @@
                                                 <?= ($job['active'] == 1) ? '<td class="text-thm2">Active</td>' : '<td class="color-red">Inactive</td>' ?>
                                                 <td>
                                                     <ul class="view_edit_delete_list">
-                                                        <li class="list-inline-item"><a href="<?= $job['slug'] ?>" data-toggle="tooltip" data-placement="bottom" title="View"><span class="flaticon-eye"></span></a></li>
-                                                        <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Edit"><span class="flaticon-edit"></span></a></li>
-                                                        <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
+                                                        <li class="list-inline-item"><a href="<?= APP_CONFIG['url'].'job/'.$job['slug'] ?>" data-toggle="tooltip" data-placement="bottom" title="View"><span class="flaticon-eye"></span></a></li>
+                                                        <li class="list-inline-item"><a href="<?= APP_CONFIG['url'].'manage-jobs/'.$job['slug'] ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><span class="flaticon-edit"></span></a></li>
+                                                        <li class="list-inline-item"><a href="<?= APP_CONFIG['url'].'manage-jobs/'.$job['slug'].'/delete' ?>" data-toggle="tooltip" data-placement="bottom" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
                                                     </ul>
                                                 </td>
                                             </tr>

@@ -122,6 +122,13 @@ class Model
             $this->query .= $where;
         }
 
+        $this->buildGroupBy();
+        $this->buildOrderBy();
+
+        if (count($this->limit)) {
+            $this->query .= ' LIMIT ' . $this->limit['start'] . ' , ' . $this->limit['limit'];
+        }
+
         $stmt = $this->connect->prepare($this->query);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();

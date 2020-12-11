@@ -14,6 +14,7 @@ $router->middleware('AuthAdmin')->group('/admin',[
 
 
 $router->get('/list-job', 'App\Controllers\JobController@index');
+$router->get('/job/{slug}', 'App\Controllers\HomeController@viewJob');
 
 $router->middleware('checkLogin')->get('/dashboard', 'App\Controllers\User\AccountController@index');
 $router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountController@profile');
@@ -28,6 +29,7 @@ $router->middleware('Company')->get('/new-job', 'App\Controllers\User\CompanyCon
 $router->middleware('Company')->post('/new-job', 'App\Controllers\User\CompanyController@postJob');
 
 $router->middleware('Company')->get('/manage-jobs', 'App\Controllers\User\CompanyController@manageJob');
+
 
 
 

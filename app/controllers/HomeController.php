@@ -195,6 +195,16 @@ class HomeController extends Controller
         }
     }
 
-    
+    public function viewJob($slug){
+        $job = new Job();
+        $company = new Company();
+        $infoJob = $job->where('slug', $slug)->getOne();
+        if(!$infoJob){
+            return $this->view('errors.404');
+        }
+        $infoCompany = $company->params(['name', 'email', 'phone', 'website', 'avatar','full_address'])->where('id', $infoJob['company_id'])->getOne();
+        
+        return $this->view('view-job',compact('infoJob','infoCompany'));
+    }
 
 }

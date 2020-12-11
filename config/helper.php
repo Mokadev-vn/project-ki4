@@ -164,10 +164,11 @@ function now($format = "Y-m-d H:i:s")
     return date($format);
 }
 
-function price($number)
+function money($number)
 {
     return number_format($number, 0, '', ',') . " VNĐ";
 }
+
 
 function sale($number, $sale)
 {

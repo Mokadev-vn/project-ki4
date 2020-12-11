@@ -97,6 +97,7 @@ class CompanyController extends Controller
         $id = getSession('user')['id'];
         $job = new Job();
         $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
-        return $this->view('user.manage-job',compact('listJob'));
+        $headJob = $job->params(['count(j.id) as total_job','count(a.id) as total_app', 'count(if(j.active = 1,1,null)) total_active'])->join('applications a', 'a.job_id = j.id', 'LEFT')->where('j.company_id', $id)->getOne();
+        return $this->view('user.manage-job',compact('listJob','headJob'));
     }
 }
