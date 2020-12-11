@@ -36,6 +36,10 @@ function fileRequest($name)
     return isset($_FILES[$name]) ? $_FILES[$name] : false;
 }
 
+function back(){
+    exit('<script> window.history.back(); </script>');
+}
+
 function redirect($path, $httpCode = 301)
 {
     if (!headers_sent()) {

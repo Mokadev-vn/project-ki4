@@ -19,7 +19,10 @@ $router->middleware('checkLogin')->get('/dashboard', 'App\Controllers\User\Accou
 $router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountController@profile');
 $router->middleware('User')->post('/user-profile', 'App\Controllers\User\AccountController@postProfile');
 
-$router->middleware('Company')->get('/post-job', 'App\Controllers\HomeController@postJob');
+
+$router->middleware('Company')->get('/new-job', 'App\Controllers\HomeController@newJob');
+$router->middleware('Company')->post('/new-job', 'App\Controllers\HomeController@postJob');
+
 $router->middleware('Company')->get('/company-profile', 'App\Controllers\User\CompanyController@profile');
 $router->middleware('Company')->post('/company-profile', 'App\Controllers\User\AccountController@postProfile');
 

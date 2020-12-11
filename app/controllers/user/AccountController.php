@@ -14,7 +14,7 @@ class AccountController extends Controller{
         $infoUser = $user->where('id', $id)->getOne();
         return $this->view('user.profile', compact('infoUser'));
     }
-    
+
     public function postProfile(){
         $id = getSession('user')['id'];
         $user = new User();

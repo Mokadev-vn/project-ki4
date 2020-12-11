@@ -58,6 +58,13 @@ $(document).ready(function () {
       }
     })
   });
+
+
+
+
+
+
+  inputDeadline.min = new Date().toISOString().split("T")[0];
 });
 
 async function postData(url, params) {
