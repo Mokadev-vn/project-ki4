@@ -20,11 +20,17 @@ $router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountC
 $router->middleware('User')->post('/user-profile', 'App\Controllers\User\AccountController@postProfile');
 
 
-$router->middleware('Company')->get('/new-job', 'App\Controllers\HomeController@newJob');
-$router->middleware('Company')->post('/new-job', 'App\Controllers\HomeController@postJob');
 
 $router->middleware('Company')->get('/company-profile', 'App\Controllers\User\CompanyController@profile');
 $router->middleware('Company')->post('/company-profile', 'App\Controllers\User\AccountController@postProfile');
+
+$router->middleware('Company')->get('/new-job', 'App\Controllers\User\CompanyController@newJob');
+$router->middleware('Company')->post('/new-job', 'App\Controllers\User\CompanyController@postJob');
+
+$router->middleware('Company')->get('/manage-jobs', 'App\Controllers\User\CompanyController@manageJob');
+
+
+
 
 $router->get('/logout', 'App\Controllers\HomeController@logout');
 

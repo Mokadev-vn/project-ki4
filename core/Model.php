@@ -91,13 +91,13 @@ class Model
             $this->query .= $where;
         }
 
-        $this->buildOrderBy();
         $this->buildGroupBy();
+        $this->buildOrderBy();
 
         if (count($this->limit)) {
             $this->query .= ' LIMIT ' . $this->limit['start'] . ' , ' . $this->limit['limit'];
         }
-
+        
         $stmt = $this->connect->prepare($this->query);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
@@ -221,7 +221,7 @@ class Model
 
         foreach ($this->join as $data) {
             list($joinType, $joinTable, $joinCondition) = $data;
-            $this->query .= " JOIN $joinType $joinTable ON $joinCondition";
+            $this->query .= " $joinType JOIN $joinTable ON $joinCondition";
         }
     }
 
