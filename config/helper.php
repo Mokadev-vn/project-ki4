@@ -36,7 +36,8 @@ function fileRequest($name)
     return isset($_FILES[$name]) ? $_FILES[$name] : false;
 }
 
-function back(){
+function back()
+{
     exit('<script> window.history.back(); </script>');
 }
 
@@ -137,7 +138,8 @@ function getCookies($name)
     return (isset($_COOKIE[$name])) ? $_COOKIE[$name] : '[]';
 }
 
-function deleteCookies($name){
+function deleteCookies($name)
+{
     return setcookie($name, 'MokaDEV', time() - 100, "/");
 }
 
@@ -169,10 +171,20 @@ function money($number)
     return number_format($number, 0, '', ',') . " VNĐ";
 }
 
+function day($number)
+{
+    $date = date($number);
+    $date2 = now();
+    $day = (strtotime($date) - strtotime($date2)) / (60 * 60 * 24);
+    if($day < 1){
+        return '<span> '. floor($day * 24) .'</span> <span> Hours</h5>';
+    }
+    return '<span> '.ceil($day) . '</span> <span> Day</h5>';
+}
 
 function sale($number, $sale)
 {
-    return ($sale == 0) ? price($number) : price($number - ($number * ($sale / 100))) . " <span>" . price($number) . "</span>";
+    return ($sale == 0) ? money($number) : money($number - ($number * ($sale / 100))) . " <span>" . money($number) . "</span>";
 }
 
 function pagination($total, $page)
@@ -215,9 +227,9 @@ function pagination($total, $page)
 function paginationDefault($total, $page)
 {
 
-    $prev = "<a href=\"?page=" . ($page - 1) . "\"". (($page > 1 && $total > 1) ? "" : "class=\"disabled\"") ."><i class=\"fa fa-angle-left\"></i></a>";
-    $next = "<a href=\"?page=" . ($page + 1) . "\"". (($page < $total && $total > 1) ? '' : "class=\"disabled\"") ."><i class=\"fa fa-angle-right\"></i></a>";
-    
+    $prev = "<a href=\"?page=" . ($page - 1) . "\"" . (($page > 1 && $total > 1) ? "" : "class=\"disabled\"") . "><i class=\"fa fa-angle-left\"></i></a>";
+    $next = "<a href=\"?page=" . ($page + 1) . "\"" . (($page < $total && $total > 1) ? '' : "class=\"disabled\"") . "><i class=\"fa fa-angle-right\"></i></a>";
+
     $pageCount = "";
 
     $pageCount .= ($page - 2) > 1 ? '<a href="#">...</a>' : '';
@@ -231,7 +243,7 @@ function paginationDefault($total, $page)
     }
 
     $pageCount .= ($page + 2) < $total ? '<a href="#">...</a>' : '';
- 
+
     return '<div class="col-lg-12 text-center">
     <div class="pagination__option">
     ' . $prev . '

@@ -16,8 +16,9 @@ $(document).ready(function () {
     $("#message-login").html("");
 
     postData("login", data).then(function (data) {
-      if(data.status == "success"){
-        window.location.href = (data.role == 3) ? URL+'admin' : URL+'dashboard';
+      if (data.status == "success") {
+        window.location.href =
+          data.role == 3 ? URL + "admin" : URL + "dashboard";
       }
     });
   });
@@ -31,15 +32,14 @@ $(document).ready(function () {
     let role = $("#role").val();
     let check = $("#check")[0];
 
-    let data ={
+    let data = {
       csrf_token,
       fullname,
       phone,
       email,
       password,
-      role
-    }
-    
+      role,
+    };
 
     $("#error-fullname").html("");
     $("#error-phone").html("");
@@ -47,22 +47,48 @@ $(document).ready(function () {
     $("#error-password").html("");
     $("#message-register").html("");
     $("#error-check").html("");
-    if(!check.checked){
+    if (!check.checked) {
       $("#error-check").text("Please check input");
       return;
     }
 
-    postData('register', data).then(function(data) {
-      if(data.status === 'success'){
+    postData("register", data).then(function (data) {
+      if (data.status === "success") {
         window.location.reload();
       }
-    })
+    });
   });
 
-
-
-
-
+  $(".application-job").click(() => {
+    let idJob = $(".application-job").attr('id-job');
+    if(!idJob){
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Did you actually apply this job !",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Apply!",
+    }).then(function (result) {
+      if (result.value) {
+        $.get(
+          URL + "application/"+idJob,
+          function (data, status) {
+            data = JSON.parse(data);
+            console.log(data);
+            if (data.error) {
+              swal("Error!", data.error, "warning");
+              return;
+            }
+            swal("Success!", data.success, "success");
+          }
+        );
+      }
+    });
+  });
 
   inputDeadline.min = new Date().toISOString().split("T")[0];
 });
@@ -80,7 +106,7 @@ async function postData(url, params) {
 
     let typeStatus = data.status == "success" ? "success" : "danger";
 
-    $("#message-"+url).append(
+    $("#message-" + url).append(
       '<div class="alert alert-' +
         typeStatus +
         '" role="alert">' +

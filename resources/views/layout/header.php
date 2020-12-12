@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>css/style.css">
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>css/responsive.css">
+    <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>js/sweetalert2/dist/sweetalert2.min.css">
+    
     <!-- Title -->
     <title>CareerUp - Search Works</title>
     <!-- Favicon -->
@@ -48,13 +50,13 @@
                             <a href="<?= APP_CONFIG['url'] ?>"><span class="title">Home</span></a>
                         </li>
                         <li>
-                            <a href=""><span class="title">Works</span></a>
+                            <a href="<?= APP_CONFIG['url'] ?>list-job"><span class="title">Works</span></a>
                         </li>
                         <li>
-                            <a href=""><span class="title">Employer</span></a>
+                            <a href="<?= APP_CONFIG['url'] ?>list-company"><span class="title">Employer</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">About Us</span></a>
+                            <a href="<?= APP_CONFIG['url'] ?>about-us"><span class="title">About Us</span></a>
                         </li>
                         <?php if (isset(getSession('user')['role']) && getSession('user')['role'] == 2): ?>
                         <li class="last">

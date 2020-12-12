@@ -1,21 +1,29 @@
 <?php
-namespace App\Controllers\User;
-use Core\Controller;
 
+namespace App\Controllers\User;
+
+use Core\Controller;
+use App\Models\CV;
 use App\Models\User;
-class AccountController extends Controller{
-    
-    public function index(){
+use App\Models\Job;
+
+class AccountController extends Controller
+{
+
+    public function index()
+    {
         return $this->view('user.dashboard');
     }
-    public function profile(){
+    public function profile()
+    {
         $id = getSession('user')['id'];
         $user = new User();
         $infoUser = $user->where('id', $id)->getOne();
         return $this->view('user.profile', compact('infoUser'));
     }
 
-    public function postProfile(){
+    public function postProfile()
+    {
         $id = getSession('user')['id'];
         $user = new User();
 
@@ -34,7 +42,7 @@ class AccountController extends Controller{
         $twitter = request('twitter');
         $linkedin = request('linkedin');
         $address = request('address');
-        $avatar = (fileRequest('avatar')['name'] != '') ? fileRequest('avatar') : false ;
+        $avatar = (fileRequest('avatar')['name'] != '') ? fileRequest('avatar') : false;
 
         if (!csrf_verify($csrf_token)) {
             $result['message'] = 'Có lỗi xảy ra!';
@@ -50,7 +58,7 @@ class AccountController extends Controller{
 
             if (!$imageUpload) {
                 $result['error']['image'] = 'File sai định dạng!';
-            }else if ($imageUpload == 'size') {
+            } else if ($imageUpload == 'size') {
                 $result['error']['image'] = 'File quá giới hạn kích thước 1,5MB!';
             }
         }
@@ -62,7 +70,7 @@ class AccountController extends Controller{
             $result['error']['email'] = 'Email đã tồn tại vui lòng nhập mail khác!';
         }
 
-        if($result['error']){
+        if ($result['error']) {
             setSession('error', $result);
             redirect('user-profile');
             return;
@@ -79,14 +87,77 @@ class AccountController extends Controller{
         $user->address = $address;
         if (isset($imageUpload)) $user->avatar = $imageUpload;
 
-        if($user->update()){
+        if ($user->update()) {
             $result['status'] = 'success';
             $result['message'] = 'Update thành công!';
             setSession('success', $result);
             redirect('user-profile');
             return;
         }
-
     }
- 
+
+    public function CvManager()
+    {
+        $id = getSession('user')['id'];
+        $cv = new CV();
+        $listCv = $cv->where('user_id',$id)->get();
+        return $this->view('user.cv-manager', compact('listCv'));
+    }
+
+    public function postCV()
+    {
+        $id = getSession('user')['id'];
+        $cv = new CV();
+        $result = [
+            'status' => 'error',
+            'message' => '',
+            'error' => false
+        ];
+
+        $csrf_token = request('csrf_token');
+        $name = request('name');
+        $file = fileRequest('file');
+
+        if (!csrf_verify($csrf_token)) {
+            $result['message'] = 'Có lỗi xảy ra!';
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        $typeImage = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/pdf", "application/msword"];
+
+        $imageUpload = uploadFile($file, $typeImage);
+
+        if (!$imageUpload) {
+            $result['error']['image'] = 'File sai định dạng!';
+        } else if ($imageUpload == 'size') {
+            $result['error']['image'] = 'File quá giới hạn kích thước 1,5MB!';
+        }
+
+        if ($result['error']) {
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        $cv->user_id = $id;
+        $cv->file = $imageUpload;
+        $cv->name = $name;
+        $cv->create_at = now();
+
+        if($cv->save()){
+            echo "save";
+        }
+        
+    }
+
+    public function applied(){
+        $id = getSession('user')['id'];
+        $job = new Job();
+        
+        $listApp = $job->params(['j.*', 'c.avatar as avatar', 'c.name as company_name', 'u.address as address'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id',$id)->get();
+
+        return $this->view('user.applied', compact('listApp'));
+    }
 }

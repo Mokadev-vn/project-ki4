@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-2 pb25 pt25">
 					<div class="logo-widget">
-						<img class="img-fluid" src="images/header-logo3.png" alt="header-logo.png">
+						<img class="img-fluid" src="<?= APP_CONFIG['static'] ?>images/header-logo3.png" alt="header-logo.png">
 					</div>
 				</div>
 				<div class="col-sm-12 col-lg-6 pb25 pt25 pl60 pr40 brdr_left_right">
@@ -159,6 +159,7 @@
 <script type="text/javascript" src="<?= APP_CONFIG['static'] ?>js/progressbar.js"></script>
 <script type="text/javascript" src="<?= APP_CONFIG['static'] ?>js/slider.js"></script>
 <script type="text/javascript" src="<?= APP_CONFIG['static'] ?>js/timepicker.js"></script>
+<script type="text/javascript" src="<?= APP_CONFIG['static'] ?>js/sweetalert2/dist/sweetalert2.min.js"></script>
 <script type="text/javascript" src="<?= APP_CONFIG['static'] ?>js/notify.min.js"></script>
 <script type="text/javascript" src="<?= APP_CONFIG['static'] ?>app.js"></script>
 

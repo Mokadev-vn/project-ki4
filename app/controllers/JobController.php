@@ -5,7 +5,7 @@ use App\Models\Job;
 class JobController extends Controller{
     public function index(){
         $job = new Job();
-
-        return $this->view('job');
+        $listJob = $job->params(['j.*, c.name as name_company, c.avatar as avatar'])->join('companys c', 'c.id = j.company_id', 'LEFT')->limit(9)->orderBy('id')->get();
+        return $this->view('list-job',compact('listJob'));
     }
 }

@@ -11,17 +11,17 @@ class HomeController extends Controller
 {
 
     public function index(){   
-        // $company = new Company();
+        $company = new Company();
         
-        // $listcompany = $company->get();
+        $listCompany = $company->limit(8)->get();
 
 
-        // $job = new Job();
+        $job = new Job();
         
-        // $listjob = $job->limit(5)->get();
+        $listJob = $job->params(['j.*, c.name as name_company, c.avatar as avatar'])->join('companys c', 'c.id = j.company_id', 'LEFT')->limit(5)->orderBy('id')->get();
         
-        // return $this->view('home', ['jobs' => $listjob,'companys' => $listcompany] );
-        return $this->view('home');
+        return $this->view('home', compact('listJob', 'listCompany'));
+
     }
 
     public function login()
@@ -170,6 +170,7 @@ class HomeController extends Controller
         if($role == 2){
             $company = new Company();
             $company->name = $fullname;
+            $company->slug = slug($fullname,'companys');
             $company->email = $email;
             $company->password = $password;
             $company->phone = $phone;
