@@ -18,7 +18,7 @@
                             </div>
                             <div class="content">
                                 <h4 class="title"><?= $info['name'] ?> <small class="verified text-thm2 pl10"><i class="fa fa-check-circle"></i></small></h4>
-                                <p>Development Manager at <span class="text-thm2">Wiggle CRC</span></p>
+                                <p><?= $info['title'] ?></p>
                                 <ul class="review_list">
                                     <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
                                     <li class="list-inline-item"><a href="#"><i class="fa fa-star"></i></a></li>
@@ -28,12 +28,10 @@
                                 </ul>
                                 <ul class="address_list">
                                     <li class="list-inline-item"><a href="#"><span class="flaticon-location-pin"></span> <?= $info['address'] ?></a></li>
-                                    <li class="list-inline-item"><a href="#"><span class="flaticon-price"></span> $13.00 - $18.00 per hour</a></li>
                                 </ul>
                             </div>
                             <ul class="view_edit_delete_list mt25 float-right fn-xl">
                                 <li class="list-inline-item"><a href="<?= APP_CONFIG['uploads'].$info['file'] ?>" data-toggle="tooltip" data-placement="top" title="Download CV"><span class="flaticon-resume"></span> Download CV</a></li>
-                                <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
                             </ul>
                         </div>
                     </div>

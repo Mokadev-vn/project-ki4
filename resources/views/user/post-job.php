@@ -6,17 +6,18 @@
             <?php layout('user.layout.menu'); ?>
             <div class="col-sm-12 col-lg-8 col-xl-9">
                 <div class="my_profile_form_area">
+                    <?= ($error && $error['status'] == 'success') ? '<div class="alert alert-success" role="alert">' . $error['message'] . '</div>' : '' ?>
                     <form action="<?= APP_CONFIG['url'] ?>new-job" method="post" enctype="multipart/form-data">
                         <?php csrf_field(); ?>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h4 class="fz20 mb20">Post a New Job</h4>
+                                <h4 class="mb30">Manage Jobs</h4>
                             </div>
                             <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
                                 <div class="icon_boxs">
                                     <div class="icon"><span class="flaticon-work"></span></div>
                                     <div class="details">
-                                        <h4>2 Job Posted</h4>
+                                        <h4><?= $headJob['total_job'] ?> Job Posted</h4>
                                     </div>
                                 </div>
                             </div>
@@ -24,7 +25,7 @@
                                 <div class="icon_boxs">
                                     <div class="icon style2"><span class="flaticon-resume"></span></div>
                                     <div class="details">
-                                        <h4>3 Applications</h4>
+                                        <h4><?= $headJob['total_app'] ?> Applications</h4>
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                                 <div class="icon_boxs">
                                     <div class="icon style3"><span class="flaticon-work"></span></div>
                                     <div class="details">
-                                        <h4>1 Active Jobs</h4>
+                                        <h4><?= $headJob['total_active'] ?> Active Jobs</h4>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +44,7 @@
                                 <div class="my_profile_input form-group">
                                     <label for="inputJobTitle">Job Title</label>
                                     <input type="text" class="form-control" name="title" id="inputJobTitle" placeholder="UX/UI Desginer" required>
+                                    <span class="text-danger"><?= (isset($error['error']['title'])) ? $error['error']['tile'] : '' ?></span>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -50,6 +52,7 @@
                                     <div class="form-group">
                                         <label for="inputDes">Job Description</label>
                                         <textarea class="form-control" name="description" id="inputDes" rows="9"></textarea>
+                                        <span class="text-danger"><?= (isset($error['error']['description'])) ? $error['error']['description'] : '' ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -57,6 +60,7 @@
                                 <div class="my_profile_input form-group">
                                     <label for="inputDeadline">Application Deadline Date</label>
                                     <input type="date" class="form-control" name="deadline" id="inputDeadline">
+                                    <span class="text-danger"><?= (isset($error['error']['deadline'])) ? $error['error']['deadline'] : '' ?></span>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
@@ -66,6 +70,7 @@
                                         <option value="1">Full Time</option>
                                         <option value="2">Part Time</option>
                                     </select>
+                                    <span class="text-danger"><?= (isset($error['error']['type'])) ? $error['error']['type'] : '' ?></span>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
@@ -108,6 +113,7 @@
                                         <option value="10"> Over 10 years </option>
                                     </select>
                                 </div>
+                                <span class="text-danger"><?= (isset($error['error']['exp'])) ? $error['error']['exp'] : '' ?></span>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <div class="my_profile_select_box form-group">
@@ -130,6 +136,7 @@
                                         <option value="2">Đà Nẵng</option>
                                         <option value="3">Thành Phố Hồ Chí Minh</option>
                                     </select>
+                                    <span class="text-danger"><?= (isset($error['error']['city'])) ? $error['error']['city'] : '' ?></span>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -137,6 +144,7 @@
                                     <div class="form-group">
                                         <label for="inputAddress">Full Address</label>
                                         <textarea class="form-control" id="inputAddress" rows="3" name="address"></textarea>
+                                        <span class="text-danger"><?= (isset($error['error']['address'])) ? $error['error']['address'] : '' ?></span>
                                     </div>
                                 </div>
                             </div>

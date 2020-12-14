@@ -208,4 +208,10 @@ class HomeController extends Controller
         return $this->view('view-job',compact('infoJob','infoCompany'));
     }
 
+    public function search(){
+        $keywords = request('keywords');
+        $local = request('local');
+        return $this->view('search');
+    }
+
 }

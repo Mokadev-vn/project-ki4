@@ -14,9 +14,13 @@ class AccountController extends Controller
     {
         return $this->view('user.dashboard');
     }
+    
     public function profile()
     {
         $id = getSession('user')['id'];
+        $error = getSession('error');
+        destroySession('error');
+
         $user = new User();
         $infoUser = $user->where('id', $id)->getOne();
         return $this->view('user.profile', compact('infoUser'));
@@ -43,6 +47,14 @@ class AccountController extends Controller
         $linkedin = request('linkedin');
         $address = request('address');
         $avatar = (fileRequest('avatar')['name'] != '') ? fileRequest('avatar') : false;
+
+        if(!$fullName){
+            $result['error']['full_name'] = 'Bạn chưa nhập trường này!';
+        }
+
+        if (!preg_match("/^[a-z][a-z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/", $email)) {
+            $result['error']['email'] = 'Vui lòng nhập đúng định dạng mail';
+        }
 
         if (!csrf_verify($csrf_token)) {
             $result['message'] = 'Có lỗi xảy ra!';
@@ -107,6 +119,9 @@ class AccountController extends Controller
     public function postCV()
     {
         $id = getSession('user')['id'];
+        $error = getSession('error');
+        destroySession('error');
+
         $cv = new CV();
         $result = [
             'status' => 'error',
@@ -118,6 +133,7 @@ class AccountController extends Controller
         $name = request('name');
         $file = fileRequest('file');
 
+        
         if (!csrf_verify($csrf_token)) {
             $result['message'] = 'Có lỗi xảy ra!';
             setSession('error', $result);
@@ -156,7 +172,7 @@ class AccountController extends Controller
         $id = getSession('user')['id'];
         $job = new Job();
         
-        $listApp = $job->params(['j.*', 'c.avatar as avatar', 'c.name as company_name', 'u.address as address'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id',$id)->get();
+        $listApp = $job->params(['j.*', 'c.avatar as avatar', 'c.name as company_name'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id',$id)->get();
 
         return $this->view('user.applied', compact('listApp'));
     }

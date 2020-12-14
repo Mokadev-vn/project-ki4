@@ -17,17 +17,22 @@
 			</div>
 			<div class="col-lg-12">
 				<div class="home-job-search-box mt20 mb20">
-					<form class="form-inline">
+					<form class="form-inline" action="<?= APP_CONFIG['url'] ?>search">
 						<div class="search_option_one">
 							<div class="form-group">
 								<label for="exampleInputName"><span class="flaticon-search"></span></label>
-								<input type="text" class="form-control h70" id="exampleInputName" placeholder="Job Title or Keywords">
+								<input type="text" name="keywords" class="form-control h70" id="exampleInputName" placeholder="Job Title or Keywords">
 							</div>
 						</div>
 						<div class="search_option_two">
 							<div class="form-group">
 								<label for="exampleInputEmail"><span class="flaticon-location-pin"></span></label>
-								<input type="text" class="form-control h70" id="exampleInputEmail" placeholder="Location">
+								<select name="local" id="" class="form-control h70">
+									<option value="1">Hà Nội</option>
+									<option value="2">Đà Nẵng</option>
+									<option value="3">TP Hồ Chí Minh</option>
+								</select>
+								
 							</div>
 						</div>
 						<div class="search_option_button">
