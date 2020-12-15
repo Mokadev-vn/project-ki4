@@ -9,6 +9,12 @@ const APP_CONFIG = [
     'uploads' => 'http://localhost/project-ki4/uploads/',
 ];
 
+const MOMO_CONFIG = [
+    'partnerCode' => 'MOMOPD7T20201214',
+    'accessKey'   => 'NK2hLNFY0HZPFRfX',
+    'secretKey'   => '0j5u1yadVQfBU9cCTQtA9NdUwWyALYxN',
+];
+
 // const MAIL_CONFIG = [
 //     'server' => 'smtp.gmail.com',
 //     'port' => 587,
@@ -19,8 +25,8 @@ const APP_CONFIG = [
 const MAIL_CONFIG = [
     'server' => 'mx2166.tino.org',
     'port' => 587,
-    'username' => '',
-    'password' => '',
+    'username' => 'admin@hoangtu.net',
+    'password' => '13061003',
     'from' => 'admin@fpt.edu.vn',
     'fromName' => 'FPT Polytechnic'
 ];
@@ -171,15 +177,26 @@ function money($number)
     return number_format($number, 0, '', ',') . " VNĐ";
 }
 
-function day($number)
-{
+function coverDay($number){
     $date = date($number);
     $date2 = now();
     $day = (strtotime($date) - strtotime($date2)) / (60 * 60 * 24);
+    return $day;
+}
+
+function day($number)
+{
+    $day = coverDay($number);
+
+    if(floor($day * 24) < 0){
+        return '<span> Time out </h5>';
+    }
     if($day < 1){
         return '<span> '. floor($day * 24) .'</span> <span> Hours</h5>';
     }
+    
     return '<span> '.ceil($day) . '</span> <span> Day</h5>';
+
 }
 
 function sale($number, $sale)
@@ -322,4 +339,23 @@ function sendMail($to, $toName, $title, $message)
         return true;
     }
     return $mail->getLogs();
+}
+
+function execPostRequest($url, $data)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data))
+    );
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    //execute post
+    $result = curl_exec($ch);
+    //close connection
+    curl_close($ch);
+    return $result;
 }

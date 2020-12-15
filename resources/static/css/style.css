@@ -5507,7 +5507,8 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
 }
 .fj_post.style3{
     border:none;
-    height:360px;
+    /* height:360px; */
+    height: auto;
     padding:30px 25px 20px 20px
 }
 .fj_post.style3 .details .thumbs{

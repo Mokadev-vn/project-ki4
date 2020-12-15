@@ -45,16 +45,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="faq_search_widget mb30">
-									<h4 class="fz20 mb15">Category</h4>
-									<div class="candidate_revew_select">
-										<select class="selectpicker w100 show-tick">
-											<option>All Categories</option>
-											<option>Recent</option>
-											<option>Old Review</option>
-										</select>
-									</div>
-								</div>
 								<div class="cl_latest_activity mb30">
 									<h4 class="fz20 mb15">Date Posted</h4>
 									<div class="ui_kit_radiobox">
@@ -170,143 +160,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="cl_carrer_lever mb30">
-									<div id="accordion" class="accordion">
-										<div class="link mb10">Career Level<i class="fa fa-caret-up"></i></div>
-										<div class="cl_submenu">
-											<div class="ui_kit_checkbox">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck14">
-													<label class="custom-control-label" for="customCheck14">Intermediate</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck15">
-													<label class="custom-control-label" for="customCheck15">Normal</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck16">
-													<label class="custom-control-label" for="customCheck16">Special</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck17">
-													<label class="custom-control-label" for="customCheck17">Experienced</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="cl_carrer_lever mb30">
-									<div id="accordion" class="accordion">
-										<div class="link mb10">Experince<i class="fa fa-caret-up"></i></div>
-										<div class="cl_submenu">
-											<div class="ui_kit_checkbox">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck18">
-													<label class="custom-control-label" for="customCheck18">1Year to 2Year</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck19">
-													<label class="custom-control-label" for="customCheck19">2Year to 3Year</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck20">
-													<label class="custom-control-label" for="customCheck20">3Year to 4Year</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck21">
-													<label class="custom-control-label" for="customCheck21">4Year to 5Year</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="cl_carrer_lever mb30">
-									<div id="accordion" class="accordion">
-										<div class="link mb10">Gender<i class="fa fa-caret-up"></i></div>
-										<div class="cl_submenu">
-											<div class="ui_kit_checkbox">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck22">
-													<label class="custom-control-label" for="customCheck22">Male</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck23">
-													<label class="custom-control-label" for="customCheck23">Female</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck24">
-													<label class="custom-control-label" for="customCheck24">Others</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="cl_carrer_lever mb30">
-									<div id="accordion" class="accordion">
-										<div class="link mb10">Industry<i class="fa fa-caret-up"></i></div>
-										<div class="cl_submenu">
-											<div class="ui_kit_checkbox">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck25">
-													<label class="custom-control-label" for="customCheck25">Development</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck26">
-													<label class="custom-control-label" for="customCheck26">Management</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck27">
-													<label class="custom-control-label" for="customCheck27">Finance</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck28">
-													<label class="custom-control-label" for="customCheck28">HTML Department</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck29">
-													<label class="custom-control-label" for="customCheck29">Seo</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck30">
-													<label class="custom-control-label" for="customCheck30">Banking</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="cl_carrer_lever">
-									<div id="accordion" class="accordion">
-										<div class="link mb10">Qualification<i class="fa fa-caret-up"></i></div>
-										<div class="cl_submenu">
-											<div class="ui_kit_checkbox">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck31">
-													<label class="custom-control-label" for="customCheck31">Certificate</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck32">
-													<label class="custom-control-label" for="customCheck32">Diploma</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck33">
-													<label class="custom-control-label" for="customCheck33">Associate</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck34">
-													<label class="custom-control-label" for="customCheck34">Degree Bachelor</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck35">
-													<label class="custom-control-label" for="customCheck35">Associate</label>
-												</div>
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="customCheck36">
-													<label class="custom-control-label" for="customCheck36">Master's Degree</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -317,7 +171,7 @@
 							<div class="fj_post style3">
 								<div class="details">
 									<div class="thumbs">
-										<img class="img-fluid" src="<?= APP_CONFIG['static'] ?><?= ($job['avatar']) ? $job['avatar'] : 'images/partners/cs1.jpg' ?>" alt="">
+										<img class="img-fluid d-block mx-auto" src="<?= ($job['avatar']) ? APP_CONFIG['uploads'].$job['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" width="120px"  alt="">
 									</div>
 									<h5 class="job_chedule text-thm2"><?= ($job['type'] == 1) ? 'Full Time' : 'Part Time' ?></h5>
 									<h4><?= $job['title'] ?></h4>

@@ -19,6 +19,8 @@ $router->get('/job/{slug}', 'App\Controllers\HomeController@viewJob');
 $router->get('/search','App\Controllers\HomeController@search');
 
 $router->middleware('checkLogin')->get('/dashboard', 'App\Controllers\User\AccountController@index');
+$router->middleware('checkLogin')->get('/change-password', 'App\Controllers\User\AccountController@changePassword');
+
 $router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountController@profile');
 $router->middleware('User')->post('/user-profile', 'App\Controllers\User\AccountController@postProfile');
 $router->middleware('User')->get('/application/{id}', 'App\Controllers\User\JobController@application');
@@ -36,8 +38,10 @@ $router->middleware('Company')->post('/new-job', 'App\Controllers\User\CompanyCo
 $router->middleware('Company')->get('/manage-jobs', 'App\Controllers\User\CompanyController@manageJob');
 $router->middleware('Company')->get('/list-resumes', 'App\Controllers\User\CompanyController@listResumes');
 
-
-
+// Pay Momo
+$router->get('/pay', 'App\Controllers\MomoController@init');
+$router->get('/pay/return', 'App\Controllers\MomoController@payReturn');
+$router->get('/pay/notify', 'App\Controllers\MomoController@payNotify');
 
 $router->get('/logout', 'App\Controllers\HomeController@logout');
 

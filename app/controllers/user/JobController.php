@@ -5,13 +5,16 @@ use Core\Controller;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Application;
+use App\Models\Company;
 
 class JobController extends Controller{
 
     public function application($id){
         $userId = getSession('user')['id'];
+
         $job = new Job();
         $application = new Application();
+
         $getJob = $job->where('id', $id)->getOne();
 
         if(!$getJob){
@@ -28,7 +31,12 @@ class JobController extends Controller{
         $application->user_id = $userId;
         $application->job_id = $id;
         $application->create_at = now();
-        if($application->save()){ 
+        $application->pay = 0;
+
+        if($application->save()){
+            $company = new Company();
+            $infoCompany = $company->params(['c.email as email','c.name as name'])->join('jobs j', 'j.company_id = c.id')->where('j.id', $id)->getOne();
+            sendMail($infoCompany['email'], $infoCompany['name'], 'There is 1 new candidate','New candidates apply to your work.');
             echo json_encode(['success' => 'Application successfully!']);
             return;
         }

@@ -62,7 +62,7 @@
 					<div class="fj_post home3">
 						<div class="details">
 							<div class="thumb fn-smd">
-								<img class="img-fluid" src="<?= APP_CONFIG['static'] ?><?= ($job['avatar']) ? $job['avatar'] : 'images/partners/cs1.jpg' ?>" alt="">
+								<img class="img-fluid" width="120px" src="<?= ($job['avatar']) ? APP_CONFIG['uploads'].$job['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="">
 							</div>
 							<h4><?= $job['title'] ?></h4>
 							<p><span class="flaticon-clock"></span> <?= formatDate($job['create_at']) ?> by <a class="text-thm3" href="#"><?= $job['name_company'] ?></a></p>
@@ -154,7 +154,7 @@
 					<?php foreach ($listCompany as $company) : ?>
 						<div class="item">
 							<div class="company_grid text-center">
-								<div class="thumb"><img class="img-fluid" src="<?= APP_CONFIG['static'] ?><?= ($company['avatar']) ? $company['avatar'] : 'images/partners/cs1.jpg' ?>" alt="5.jpg"></div>
+								<div class="thumb"><img class="img-fluid img-thumbnail" src="<?= ($company['avatar']) ? APP_CONFIG['uploads'].$company['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="5.jpg"></div>
 								<div class="details">
 									<h4><?= $company['name'] ?></h4>
 									<p><span class="flaticon-location-pin pr10"></span><?= $company['full_address'] ?></p>

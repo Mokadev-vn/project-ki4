@@ -111,16 +111,17 @@ class AccountController extends Controller
     public function CvManager()
     {
         $id = getSession('user')['id'];
+        $error = getSession('error');
+        destroySession('error');
         $cv = new CV();
         $listCv = $cv->where('user_id',$id)->get();
-        return $this->view('user.cv-manager', compact('listCv'));
+        return $this->view('user.cv-manager', compact('listCv','error'));
     }
 
     public function postCV()
     {
         $id = getSession('user')['id'];
-        $error = getSession('error');
-        destroySession('error');
+        
 
         $cv = new CV();
         $result = [
@@ -133,7 +134,7 @@ class AccountController extends Controller
         $name = request('name');
         $file = fileRequest('file');
 
-        
+
         if (!csrf_verify($csrf_token)) {
             $result['message'] = 'Có lỗi xảy ra!';
             setSession('error', $result);
@@ -175,5 +176,12 @@ class AccountController extends Controller
         $listApp = $job->params(['j.*', 'c.avatar as avatar', 'c.name as company_name'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id',$id)->get();
 
         return $this->view('user.applied', compact('listApp'));
+    }
+
+    public function changePassword(){
+        $id = getSession('user')['id'];
+        $user = new User();
+
+        return $this->view('user.change-password');
     }
 }
