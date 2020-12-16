@@ -91,6 +91,8 @@ $(document).ready(function () {
   });
 
   inputDeadline.min = new Date().toISOString().split("T")[0];
+
+
 });
 
 async function postData(url, params) {
@@ -115,4 +117,13 @@ async function postData(url, params) {
     );
   });
   return JSON.parse(result);
+}
+
+function checkCaptcha(){
+  var response = grecaptcha.getResponse();
+  if(response.length == 0) 
+  {
+    document.querySelector("#error-captcha").innerHTML = "Please verify you are humann!"
+    return false;
+  }
 }

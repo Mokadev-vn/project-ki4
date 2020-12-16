@@ -204,4 +204,16 @@ class CompanyController extends Controller
 
         return $this->view('user.list-resumes',compact('listResumes'));
     }
+
+
+    public function wallet(){
+        $id = getSession('user')['id'];
+        $error = getSession('error');
+        destroySession('error');
+        
+        $company = new Company();
+        $info = $company->params(['coin'])->where('id', $id)->getOne();
+
+        return $this->view('user.wallet', compact('info', 'error'));
+    }
 }

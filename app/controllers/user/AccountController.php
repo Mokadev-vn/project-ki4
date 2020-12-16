@@ -124,6 +124,7 @@ class AccountController extends Controller
         
 
         $cv = new CV();
+        
         $result = [
             'status' => 'error',
             'message' => '',

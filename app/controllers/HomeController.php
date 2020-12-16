@@ -110,6 +110,10 @@ class HomeController extends Controller
 
     public function register()
     {
+
+        $user = new User();
+        $company = new Company();
+
         $result = [
             'status' => 'error',
             'message' => '',
@@ -143,6 +147,12 @@ class HomeController extends Controller
             $result['error']['password'] = 'Bạn chưa nhập trường này!';
         }
 
+        $checkUserEmail = $user->where('email',$email)->get();
+        $checkCompanyEmail = $company->where('email',$email)->get();
+
+        if(count($checkUserEmail) > 0|| count($checkCompanyEmail) > 0){
+            $result['error']['email'] = 'Email đã tồn tại!';
+        }
 
         if ($result['error']) {
             echo json_encode($result);
@@ -151,8 +161,9 @@ class HomeController extends Controller
 
         $password = password_hash($password, PASSWORD_BCRYPT);
 
+        
         if($role == 1){
-            $user = new User();
+            
             $user->fullname = $fullname;
             $user->email = $email;
             $user->password = $password;
@@ -168,7 +179,7 @@ class HomeController extends Controller
         }
 
         if($role == 2){
-            $company = new Company();
+            
             $company->name = $fullname;
             $company->slug = slug($fullname,'companys');
             $company->email = $email;

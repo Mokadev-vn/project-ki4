@@ -52,7 +52,7 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="candidate_personal_overview style3">
                     <div class="thumb">
-                        <img class="img-fluid rounded" src="<?= ($infoCompany['avatar']) ? APP_CONFIG['uploads'].$infoCompany['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" width="120px" alt="cs1.jpg">
+                        <img class="img-fluid rounded mx-auto img-thubn w-auto" src="<?= ($infoCompany['avatar']) ? APP_CONFIG['uploads'].$infoCompany['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="cs1.jpg">
                     </div>
                     <ul class="company_job_list mt30 mb30">
                         <li class="list-inline-item"><a class="mt25" href="#">View all jobs <span class="flaticon-right-arrow pl10"></span></a></li>

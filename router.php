@@ -38,10 +38,12 @@ $router->middleware('Company')->post('/new-job', 'App\Controllers\User\CompanyCo
 $router->middleware('Company')->get('/manage-jobs', 'App\Controllers\User\CompanyController@manageJob');
 $router->middleware('Company')->get('/list-resumes', 'App\Controllers\User\CompanyController@listResumes');
 
+$router->middleware('Company')->get('/wallet', 'App\Controllers\User\CompanyController@wallet');
+
 // Pay Momo
-$router->get('/pay', 'App\Controllers\MomoController@init');
+$router->post('/pay', 'App\Controllers\MomoController@init');
 $router->get('/pay/return', 'App\Controllers\MomoController@payReturn');
-$router->get('/pay/notify', 'App\Controllers\MomoController@payNotify');
+$router->post('/pay/notify', 'App\Controllers\MomoController@payNotify');
 
 $router->get('/logout', 'App\Controllers\HomeController@logout');
 

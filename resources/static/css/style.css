@@ -6069,8 +6069,8 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
 }
 .company_grid .thumb{
     margin-bottom:30px;
-    width:80%;
-    margin-left:10%
+    /* width:80%;
+    margin-left:10% */
 }
 .company_grid .details a.btn{
     background-color:#1c327e;
@@ -8821,4 +8821,9 @@ button.btn.my-2.my-sm-0{
 .alert-warning .alert-link
 {
     color: #fa3a0e;
+}
+
+.img-thubn{
+    width: 120px;
+    height: 120px;
 }

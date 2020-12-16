@@ -171,7 +171,7 @@
 							<div class="fj_post style3">
 								<div class="details">
 									<div class="thumbs">
-										<img class="img-fluid d-block mx-auto" src="<?= ($job['avatar']) ? APP_CONFIG['uploads'].$job['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" width="120px"  alt="">
+										<img class="img-fluid d-block mx-auto img-thubn w-auto" src="<?= ($job['avatar']) ? APP_CONFIG['uploads'].$job['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="">
 									</div>
 									<h5 class="job_chedule text-thm2"><?= ($job['type'] == 1) ? 'Full Time' : 'Part Time' ?></h5>
 									<h4><?= $job['title'] ?></h4>

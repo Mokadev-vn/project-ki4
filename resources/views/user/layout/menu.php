@@ -15,6 +15,8 @@
 				<li><a href="<?= APP_CONFIG['url'] ?>new-job"><span class="flaticon-resume"></span> Post a New Job</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>manage-jobs"><span class="flaticon-paper-plane"></span> Manage Jobs</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>list-resumes"><span class="flaticon-analysis"></span> Shortlisted Resumes</a></li>
+				<li><a href="<?= APP_CONFIG['url'] ?>wallet"><span class="flaticon-wallet"></span> Wallet</a></li>
+				
 			<?php endif; ?>
 			<li><a href="<?= APP_CONFIG['url'] ?>change-password"><span class="flaticon-locked"></span> Change Password</a></li>
 			<li><a href="<?= APP_CONFIG['url'] ?>logout"><span class="flaticon-logout"></span> Logout</a></li>

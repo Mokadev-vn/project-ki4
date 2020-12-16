@@ -1,3 +1,7 @@
+<?php 
+use Core\DB;
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -13,13 +17,13 @@
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>css/responsive.css">
     <link rel="stylesheet" href="<?= APP_CONFIG['static'] ?>js/sweetalert2/dist/sweetalert2.min.css">
-    
+
     <!-- Title -->
     <title>CareerUp - Search Works</title>
     <!-- Favicon -->
     <link href="<?= APP_CONFIG['static'] ?>images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
     <link href="<?= APP_CONFIG['static'] ?>images/favicon.ico" sizes="128x128" rel="shortcut icon" />
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -58,10 +62,10 @@
                         <li>
                             <a href="<?= APP_CONFIG['url'] ?>about-us"><span class="title">About Us</span></a>
                         </li>
-                        <?php if (isset(getSession('user')['role']) && getSession('user')['role'] == 2): ?>
-                        <li class="last">
-                            <a href="<?= APP_CONFIG['url'] ?>new-job"><span class="title">Post a Job</span></a>
-                        </li>
+                        <?php if (isset(getSession('user')['role']) && getSession('user')['role'] == 2) : ?>
+                            <li class="last">
+                                <a href="<?= APP_CONFIG['url'] ?>new-job"><span class="title">Post a Job</span></a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                     <?php if (!getSession('user')) : ?>
@@ -72,67 +76,17 @@
                         <ul class="header_user_notif pull-right dn-smd">
                             <li class="user_notif">
                                 <div class="dropdown">
-                                    <a href="page-candidates-job-alert.html" data-toggle="dropdown"><span class="flaticon-alarm color-white fz20"></span><span>8</span></a>
-                                    <div class="dropdown-menu">
-                                        <div class="so_heading">
-                                            <p>Notifications</p>
-                                        </div>
-                                        <div class="so_content" data-simplebar="init">
-                                            <div class="simplebar-wrapper" style="margin: -20px -15px -25px -20px;">
-                                                <div class="simplebar-height-auto-observer-wrapper">
-                                                    <div class="simplebar-height-auto-observer"></div>
-                                                </div>
-                                                <div class="simplebar-mask">
-                                                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                                        <div class="simplebar-content" style="padding: 20px 15px 25px 20px; height: auto; overflow: hidden;">
-                                                            <ul>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                                <li>
-                                                                    <h5>Candidate suggestion</h5>
-                                                                    <p>You might be interested based on your profile.</p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
-                                            </div>
-                                            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-                                                <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div>
-                                            </div>
-                                            <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
-                                                <div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php if (getSession('user')['role'] == 2) : ?>
+                                        <?php
+                                             $coin = DB::query("SELECT coin FROM companys WHERE id = ".getSession('user')['id']); 
+                                        ?>
+                                        <a href="<?= APP_CONFIG['url'] ?>wallet"><span class="flaticon-wallet color-white fz20"></span> <?= money($coin[0]['coin']) ?></a>
+                                    <?php endif; ?>
                                 </div>
                             </li>
                             <li class="user_setting">
                                 <div class="dropdown">
-                                    <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" src="<?= APP_CONFIG['uploads']. ((getSession('user')['avatar']) ? getSession('user')['avatar'] : 'avatar.png') ?>" alt=""> <span class="pl15 pr15"><?= getSession('user')['fullname'] ?></span></a>
+                                    <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" src="<?= APP_CONFIG['uploads'] . ((getSession('user')['avatar']) ? getSession('user')['avatar'] : 'avatar.png') ?>" alt=""> <span class="pl15 pr15"><?= getSession('user')['fullname'] ?></span></a>
                                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 68px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         <div class="user_set_header">
                                             <p>Hi, <?= getSession('user')['fullname'] ?></p>

@@ -17,7 +17,7 @@
                                 <div class="details">
                                     <h5 class="job_chedule text-thm mt0"><?= ($app['type'] == 1) ? 'Full Time' : 'Part Time' ?></h5>
                                     <div class="thumb fn-smd">
-                                        <img class="img-fluid" src="<?= APP_CONFIG['static'] ?><?= ($app['avatar']) ? $app['avatar'] : 'images/partners/cs1.jpg' ?>" alt="1.jpg">
+                                        <img class="img-fluid img-thubn" src="<?= ($app['avatar']) ? APP_CONFIG['uploads'].$app['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="1.jpg">
                                     </div>
                                     <h4><?= $app['title'] ?></h4>
                                     <p><span class="flaticon-clock"></span> <?= formatDate($app['create_at']) ?> by <a class="text-thm" href="#"><?= $app['company_name'] ?></a></p>
