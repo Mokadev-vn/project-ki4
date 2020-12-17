@@ -160,7 +160,7 @@
                             <div class="employe_grid text-center">
                                 <p><span class="text-thm2"><?= $company['open_job'] ?></span> Open Jobs</p>
                                 <div class="thumb">
-                                    <img src="<?= APP_CONFIG['static'] ?><?= ($company['avatar']) ? $company['avatar'] : 'images/partners/cs1.jpg' ?>" alt="">
+                                    <img src="<?= ($company['avatar']) ? APP_CONFIG['uploads'].$company['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="">
                                 </div>
                                 <div class="details">
                                     <h4><?= $company['name'] ?></h4>
