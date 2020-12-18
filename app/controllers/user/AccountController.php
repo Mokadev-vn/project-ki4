@@ -6,6 +6,7 @@ use Core\Controller;
 use App\Models\CV;
 use App\Models\User;
 use App\Models\Job;
+use App\Models\Application;
 
 class AccountController extends Controller
 {
@@ -14,7 +15,7 @@ class AccountController extends Controller
     {
         return $this->view('user.dashboard');
     }
-    
+
     public function profile()
     {
         $id = getSession('user')['id'];
@@ -48,7 +49,7 @@ class AccountController extends Controller
         $address = request('address');
         $avatar = (fileRequest('avatar')['name'] != '') ? fileRequest('avatar') : false;
 
-        if(!$fullName){
+        if (!$fullName) {
             $result['error']['full_name'] = 'Bạn chưa nhập trường này!';
         }
 
@@ -114,17 +115,17 @@ class AccountController extends Controller
         $error = getSession('error');
         destroySession('error');
         $cv = new CV();
-        $listCv = $cv->where('user_id',$id)->get();
-        return $this->view('user.cv-manager', compact('listCv','error'));
+        $listCv = $cv->where('user_id', $id)->get();
+        return $this->view('user.cv-manager', compact('listCv', 'error'));
     }
 
     public function postCV()
     {
         $id = getSession('user')['id'];
-        
+
 
         $cv = new CV();
-        
+
         $result = [
             'status' => 'error',
             'message' => '',
@@ -138,6 +139,13 @@ class AccountController extends Controller
 
         if (!csrf_verify($csrf_token)) {
             $result['message'] = 'Có lỗi xảy ra!';
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        if (!$name) {
+            $result['error']['name'] = 'Vui lòng đặt tên CV!';
             setSession('error', $result);
             back();
             return;
@@ -164,22 +172,68 @@ class AccountController extends Controller
         $cv->name = $name;
         $cv->create_at = now();
 
-        if($cv->save()){
-            echo "save";
+        if ($cv->save()) {
+            $result['status'] = 'success';
+            $result['message'] = 'Up CV successfully';
+            setSession('error', $result);
+            redirect('cv-manager');
+            return;
         }
-        
     }
 
-    public function applied(){
+    public function deleteCV()
+    {
+        $idCv = request('idCV');
+        $id = getSession('user')['id'];
+        if (!$idCv) {
+            return $this->view('errors.404');
+        }
+
+        $cv = new CV();
+        $getCV = $cv->where('id', $idCv)->where('user_id', $id, 'AND')->getOne();
+
+        if (!$getCV) {
+            return $this->view('errors.404');
+        }
+
+        $cv->where('id', $idCv)->delete();
+
+        echo json_encode(['success' => 'Delete success!']);
+        return;
+    }
+
+    public function applied()
+    {
         $id = getSession('user')['id'];
         $job = new Job();
-        
-        $listApp = $job->params(['j.*', 'c.avatar as avatar', 'c.name as company_name'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id',$id)->get();
+
+        $listApp = $job->params(['j.*', 'a.id as id_ap', 'c.avatar as avatar', 'c.name as company_name'])->join('applications a', 'a.job_id = j.id')->join('companys c', 'c.id = j.company_id')->where('a.user_id', $id)->get();
 
         return $this->view('user.applied', compact('listApp'));
     }
 
-    public function changePassword(){
+    public function deleteApplied()
+    {
+        $idAp = request('idAp');
+        $id = getSession('user')['id'];
+
+        if (!$idAp) {
+            return $this->view('errors.404');
+        }
+
+        $application = new Application();
+        $getAp = $application->where('id', $idAp)->where('user_id', $id)->getOne();
+
+        if (!$getAp) {
+            return $this->view('errors.404');
+        }
+        $application->where('id', $idAp)->delete();
+        echo json_encode(['success' => 'Delete success!']);
+        return;
+    }
+
+    public function changePassword()
+    {
         $id = getSession('user')['id'];
         $user = new User();
 

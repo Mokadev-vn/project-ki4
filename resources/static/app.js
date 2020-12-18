@@ -60,8 +60,8 @@ $(document).ready(function () {
   });
 
   $(".application-job").click(() => {
-    let idJob = $(".application-job").attr('id-job');
-    if(!idJob){
+    let idJob = $(".application-job").attr("id-job");
+    if (!idJob) {
       return;
     }
     swal({
@@ -74,25 +74,142 @@ $(document).ready(function () {
       confirmButtonText: "Apply!",
     }).then(function (result) {
       if (result.value) {
-        $.get(
-          URL + "application/"+idJob,
-          function (data, status) {
-            data = JSON.parse(data);
-            console.log(data);
-            if (data.error) {
-              swal("Error!", data.error, "warning");
-              return;
-            }
-            swal("Success!", data.success, "success");
+        $.get(URL + "application/" + idJob, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
           }
-        );
+          swal("Success!", data.success, "success");
+        });
       }
     });
   });
 
+  $(".down-cv").click(function () {
+    let idAp = $(this).attr("id-ap");
+
+    if (!idAp) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "You want to download this file must pay 20,000 VND!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Payment now!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "payment/", { idAp }, function (data, status) {
+          data = JSON.parse(data);
+
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          window.open(data.link);
+        });
+      }
+    });
+  });
+
+  $(".delete-cv").click(function () {
+    let idCV = $(this).attr("id-cv");
+    if (!idCV) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete this cv!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "cv-manager/delete",{idCV}, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function() {
+            window.reload();
+          }, 2500)
+        });
+      }
+    });
+  });
+
+  $(".delete-apply").click(function () {
+    let idAp = $(this).attr("id-ap");
+    if (!idAp) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete Apply!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "applied/delete",{idAp}, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function() {
+            window.reload();
+          }, 2500)
+        });
+      }
+    });
+  });
+
+  $(".delete-job").click(function () {
+    let idJob = $(this).attr("id-job");
+    if (!idJob) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete Job!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "manage-jobs/delete",{idJob}, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function() {
+            window.reload();
+          }, 2500)
+        });
+      }
+    });
+  });
   inputDeadline.min = new Date().toISOString().split("T")[0];
-
-
 });
 
 async function postData(url, params) {
@@ -119,11 +236,11 @@ async function postData(url, params) {
   return JSON.parse(result);
 }
 
-function checkCaptcha(){
+function checkCaptcha() {
   var response = grecaptcha.getResponse();
-  if(response.length == 0) 
-  {
-    document.querySelector("#error-captcha").innerHTML = "Please verify you are humann!"
+  if (response.length == 0) {
+    document.querySelector("#error-captcha").innerHTML =
+      "Please verify you are humann!";
     return false;
   }
 }

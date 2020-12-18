@@ -1,6 +1,6 @@
 <?php layout('layout.header'); ?>
 <?php
-    $role = isset(getSession('user')['role']) ? getSession('user')['role'] : 0;
+$role = isset(getSession('user')['role']) ? getSession('user')['role'] : 0;
 ?>
 <!-- Candidate Personal Info Details-->
 <section class="bgc-fa pb30 mt70 mbt45">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="row job_meta_list mt30">
                         <?php if ($role != 2 && coverDay($infoJob['deadline']) >= 0) : ?>
-                            <div class="col-sm-4 col-lg-4"><button class="btn btn-block btn-thm application-job" <?= empty(getSession('user')) ? 'data-toggle="modal" data-target="#exampleModalCenter" ' : 'id-job="'.$infoJob['id'].'"' ?>>Apply Now <span class="flaticon-right-arrow pl10"></span></button></div>
+                            <div class="col-sm-4 col-lg-4"><button class="btn btn-block btn-thm application-job" <?= empty(getSession('user')) ? 'data-toggle="modal" data-target="#exampleModalCenter" ' : 'id-job="' . $infoJob['id'] . '"' ?>>Apply Now <span class="flaticon-right-arrow pl10"></span></button></div>
                             <div class="col-sm-4 col-lg-4"><button class="btn btn-block btn-gray" <?= empty(getSession('user')) ? 'data-toggle="modal" data-target="#exampleModalCenter"' : '' ?>><span class="flaticon-favorites fz24 pr10"></span> Shortlist</button></div>
                         <?php endif; ?>
                         <div class="col-sm-4 col-lg-4"><a class="btn prpl40 btn-white" href="https://m.facebook.com/sharer.php?u=<?= APP_CONFIG['url'] . 'job/' . $infoJob['slug']; ?>"><span class="flaticon-share fz24 pr10"></span> Share Job</a></div>
@@ -52,7 +52,7 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="candidate_personal_overview style3">
                     <div class="thumb">
-                        <img class="img-fluid rounded mx-auto img-thubn w-auto" src="<?= ($infoCompany['avatar']) ? APP_CONFIG['uploads'].$infoCompany['avatar'] : APP_CONFIG['static'].'images/partners/cs1.jpg' ?>" alt="cs1.jpg">
+                        <img class="img-fluid rounded mx-auto img-thubn w-auto" src="<?= ($infoCompany['avatar']) ? APP_CONFIG['uploads'] . $infoCompany['avatar'] : APP_CONFIG['static'] . 'images/partners/cs1.jpg' ?>" alt="cs1.jpg">
                     </div>
                     <ul class="company_job_list mt30 mb30">
                         <li class="list-inline-item"><a class="mt25" href="#">View all jobs <span class="flaticon-right-arrow pl10"></span></a></li>
@@ -74,7 +74,7 @@
                             <p class="mb30"><?= $infoJob['description'] ?></p>
 
                             <?php if ($role != 2 && coverDay($infoJob['deadline']) >= 0) : ?>
-                                <button class="btn btn-lg btn-thm mb15 application-job" <?= empty(getSession('user')) ? 'data-toggle="modal" data-target="#exampleModalCenter"' : 'id-job="'.$infoJob['id'].'"' ?>>Apply Now <span class="flaticon-right-arrow pl10"></span></button>
+                                <button class="btn btn-lg btn-thm mb15 application-job" <?= empty(getSession('user')) ? 'data-toggle="modal" data-target="#exampleModalCenter"' : 'id-job="' . $infoJob['id'] . '"' ?>>Apply Now <span class="flaticon-right-arrow pl10"></span></button>
                             <?php endif; ?>
 
                             <a class="btn btn-lg btn-gray float-right" href="https://m.facebook.com/sharer.php?u=<?= APP_CONFIG['url'] . 'job/' . $infoJob['slug']; ?>"><span class="flaticon-share pr10"></span> Share Job</a>
@@ -85,57 +85,25 @@
                             <h4 class="title mb20">People Also Viewed</h4>
                         </div>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="fj_post style2 one">
-                            <div class="details">
-                                <h5 class="job_chedule text-thm2">Full Time</h5>
-                                <div class="thumb fn-smd">
-                                    <img class="img-fluid" src="images/partners/1.jpg" alt="1.jpg">
+                    <?php foreach ($listJob as $job) : ?>
+                        <div class="col-lg-12">
+                            <div class="fj_post style2 one">
+                                <div class="details">
+                                    <h5 class="job_chedule text-thm2">Full Time</h5>
+                                    <div class="thumb fn-smd">
+                                        <img class="img-fluid img-thubn" src="<?= ($job['avatar']) ? APP_CONFIG['uploads'] . $job['avatar'] : APP_CONFIG['static'] . 'images/partners/cs1.jpg' ?>" alt="">
+                                    </div>
+                                    <h4><?= $job['title'] ?></h4>
+                                    <p><span class="flaticon-clock"></span> <?= formatDate($job['create_at']) ?> by <a class="text-thm3" href="#"><?= $job['name_company'] ?></a></p>
+                                    <ul class="featurej_post">
+                                        <li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#"><?= ($job['city'] == 1) ? 'Hà Nội' : (($job['city'] == 2) ? 'Đà Nẵng' : 'TP Hồ Chí Minh') ?></a></li>
+                                        <li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#"><?= money($job['salary_min']) ?> - <?= money($job['salary_max']) ?></a></li>
+                                    </ul>
                                 </div>
-                                <h4>JEB Product Sales Specialist, Russia & CIS</h4>
-                                <p>Posted 23 August by <a class="text-thm2" href="#">Wiggle CRC</a></p>
-                                <ul class="featurej_post">
-                                    <li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#">Bothell, WA, USA</a></li>
-                                    <li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#">$13.00 - $18.00 per hour</a></li>
-                                </ul>
+                                <a class="favorit" href="<?= APP_CONFIG['url'] . 'job/' . $job['slug'] ?>"><span class="flaticon-favorites"></span></a>
                             </div>
-                            <a class="favorit" href="#"><span class="flaticon-favorites"></span></a>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="fj_post style2 one">
-                            <div class="details">
-                                <h5 class="job_chedule text-thm2">Part Time</h5>
-                                <div class="thumb fn-smd">
-                                    <img class="img-fluid" src="images/partners/2.jpg" alt="2.jpg">
-                                </div>
-                                <h4>General Ledger Accountant</h4>
-                                <p>Posted 23 August by <a class="text-thm2" href="#">Robert Half Finance & Accounting</a></p>
-                                <ul class="featurej_post">
-                                    <li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#">RG40, Wokingham</a></li>
-                                    <li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#">$13.00 - $18.00 per hour</a></li>
-                                </ul>
-                            </div>
-                            <a class="favorit" href="#"><span class="flaticon-favorites"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="fj_post style2 one">
-                            <div class="details">
-                                <h5 class="job_chedule text-thm2">Full Time</h5>
-                                <div class="thumb fn-smd">
-                                    <img class="img-fluid" src="images/partners/3.jpg" alt="3.jpg">
-                                </div>
-                                <h4>Junior Digital Graphic Designer</h4>
-                                <p>Posted 23 August by <a class="text-thm2" href="#">Parkside Recruitment - Uxbridge Finance</a></p>
-                                <ul class="featurej_post">
-                                    <li class="list-inline-item"><span class="flaticon-location-pin"></span> <a href="#">New Denham, UB8 1JG</a></li>
-                                    <li class="list-inline-item"><span class="flaticon-price pl20"></span> <a href="#">$13.00 - $18.00 per hour</a></li>
-                                </ul>
-                            </div>
-                            <a class="favorit" href="#"><span class="flaticon-favorites"></span></a>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="col-xl-4">

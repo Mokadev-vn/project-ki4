@@ -77,7 +77,7 @@
 			<?php endforeach; ?>
 			<div class="col-lg-6 offset-lg-3">
 				<div class="pjc_all_btn text-center mt15">
-					<a class="btn btn-blue" href="#">Show More Jobs <span class="flaticon-right-arrow pl10"></span></a>
+					<a class="btn btn-blue" href="list-job">Show More Jobs <span class="flaticon-right-arrow pl10"></span></a>
 				</div>
 			</div>
 		</div>

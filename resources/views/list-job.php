@@ -7,7 +7,7 @@
 				<div class="row mb20">
 					<div class="col-md-6 col-lg-6">
 						<div class="candidate_job_alart_btn pjlv3">
-							<h4 class="fz20 mb15">20 Candidates Found</h4>
+							<h4 class="fz20 mb15"><?= count($listJob) ?> Candidates Found</h4>
 							<button class="btn btn-thm btns ml10 fr-xsd">Show Filter</button>
 						</div>
 					</div>

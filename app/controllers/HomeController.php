@@ -214,15 +214,20 @@ class HomeController extends Controller
         if(!$infoJob){
             return $this->view('errors.404');
         }
+
         $infoCompany = $company->params(['name', 'email', 'phone', 'website', 'avatar','full_address'])->where('id', $infoJob['company_id'])->getOne();
-        
-        return $this->view('view-job',compact('infoJob','infoCompany'));
+        $listJob = $job->params(['j.*', 'c.avatar as avatar', 'c.name as name_company'])->join('companys c', 'c.id = j.company_id')->where('deadline', now(), '>')->where('active',1)->limit(5)->get();
+
+        return $this->view('view-job',compact('infoJob','infoCompany','listJob'));
     }
 
     public function search(){
         $keywords = request('keywords');
         $local = request('local');
-        return $this->view('search');
+        $job = new Job();
+        $listJob = $job->query("SELECT j.*, c.avatar as avatar, c.name as name_company FROM jobs j join companys c on c.id = j.company_id WHERE j.title like ? AND j.city = ?", ["%$keywords%", $local]);
+
+        return $this->view('search',compact('listJob'));
     }
 
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Job;
 use App\Models\Application;
 use App\Models\Company;
+use App\Models\CV;
 
 class JobController extends Controller{
 
@@ -14,11 +15,19 @@ class JobController extends Controller{
 
         $job = new Job();
         $application = new Application();
+        $Cv = new CV();
 
         $getJob = $job->where('id', $id)->getOne();
 
         if(!$getJob){
             echo json_encode(['error'=>'Job not found']);
+            return;
+        }
+
+        $getCV = $Cv->where('user_id', $userId)->getOne();
+
+        if(!$getCV){
+            echo json_encode(['error'=>'Please upload your cv to the system!']);
             return;
         }
 
@@ -30,6 +39,7 @@ class JobController extends Controller{
 
         $application->user_id = $userId;
         $application->job_id = $id;
+        $application->cv_id = $getCV['id'];
         $application->create_at = now();
         $application->pay = 0;
 

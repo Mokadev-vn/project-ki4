@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use Core\DB;
 ?>
 
@@ -78,7 +79,7 @@ use Core\DB;
                                 <div class="dropdown">
                                     <?php if (getSession('user')['role'] == 2) : ?>
                                         <?php
-                                             $coin = DB::query("SELECT coin FROM companys WHERE id = ".getSession('user')['id']); 
+                                        $coin = DB::query("SELECT coin FROM companys WHERE id = " . getSession('user')['id']);
                                         ?>
                                         <a href="<?= APP_CONFIG['url'] ?>wallet"><span class="flaticon-wallet color-white fz20"></span> <?= money($coin[0]['coin']) ?></a>
                                     <?php endif; ?>
@@ -92,7 +93,11 @@ use Core\DB;
                                             <p>Hi, <?= getSession('user')['fullname'] ?></p>
                                         </div>
                                         <div class="user_setting_content">
-                                            <a class="dropdown-item active" href="<?= APP_CONFIG['url'] ?>dashboard"><span class="flaticon-dashboard"></span> Dashboard</a>
+                                            <?php if (getSession('user')['role'] == 3) : ?>
+                                                <a class="dropdown-item active" href="<?= APP_CONFIG['url'] ?>admin"><span class="flaticon-dashboard"></span> Cpanel Admin</a>
+                                            <?php else : ?>
+                                                <a class="dropdown-item active" href="<?= APP_CONFIG['url'] ?>dashboard"><span class="flaticon-dashboard"></span> Dashboard</a>
+                                            <?php endif; ?>
                                             <a class="dropdown-item" href="<?= APP_CONFIG['url'] ?>change-password"><span class="flaticon-locked"></span> Change Password</a>
                                             <a class="dropdown-item" href="<?= APP_CONFIG['url'] ?>logout"><span class="flaticon-logout"></span> Logout</a>
                                         </div>

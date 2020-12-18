@@ -3,7 +3,7 @@
 namespace App\Controllers\User;
 
 use Core\Controller;
-use App\Models\User;
+use App\Models\CV;
 use App\Models\Company;
 use App\Models\Application;
 use App\Models\Job;
@@ -112,10 +112,13 @@ class CompanyController extends Controller
         destroySession('error');
        
         $job = new Job();
-        $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
-        $headJob = $job->params(['count(j.id) as total_job','count(a.id) as total_app', 'count(if(j.active = 1,1,null)) total_active'])->join('applications a', 'a.job_id = j.id', 'LEFT')->where('j.company_id', $id)->getOne();
+        $application = new Application();
 
-        return $this->view('user.post-job', compact('error','headJob'));
+        $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
+        $headJob = $job->params(['count(id) as job_total', 'count(if(active = 1,1,null)) as active_total'])->where('company_id', $id)->getOne();
+
+        $apply   = $application->params(['count(a.id) as total'])->join('jobs j','j.id = a.job_id')->where('j.company_id', $id)->getOne();
+        return $this->view('user.post-job', compact('error','headJob','apply'));
     }
 
     public function postJob()
@@ -192,16 +195,127 @@ class CompanyController extends Controller
     {
         $id = getSession('user')['id'];
         $job = new Job();
+        $application = new Application();
         $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
-        $headJob = $job->params(['count(j.id) as total_job','count(a.id) as total_app', 'count(if(j.active = 1,1,null)) total_active'])->join('applications a', 'a.job_id = j.id', 'LEFT')->where('j.company_id', $id)->getOne();
-        return $this->view('user.manage-job',compact('listJob','headJob'));
+
+        $headJob = $job->params(['count(id) as job_total', 'count(if(active = 1,1,null)) as active_total'])->where('company_id', $id)->getOne();
+        $apply   = $application->params(['count(a.id) as total'])->join('jobs j','j.id = a.job_id')->where('j.company_id', $id)->getOne();
+        return $this->view('user.manage-job',compact('listJob','headJob','apply'));
+    }
+
+    public function editJob($slug){
+        $id = getSession('user')['id'];
+        $error = getSession('error');
+        destroySession('error');
+        $job = new Job();
+        $getJob = $job->where('slug',$slug)->where('company_id', $id, 'AND')->getOne();
+
+        if(!$getJob){
+            return $this->view('errors.404');
+        }
+
+        return $this->view('user.edit-job', compact('getJob','error'));
+    }
+
+    public function postEditJob($slug){
+        $id = getSession('user')['id'];
+        $job = new Job();
+        $getJob = $job->where('slug',$slug)->where('company_id', $id, 'AND')->getOne();
+
+        if(!$getJob){
+            return $this->view('errors.404');
+        }
+
+        $result = [
+            'status' => 'error',
+            'message' => '',
+            'error' => false
+        ];
+
+        $csrf_token = request('csrf_token');
+        $title = request('title');
+        $description = request('description');
+        $deadline = request('deadline');
+        $type = request('type');
+        $skills = request('skills');
+        $salaryMin = request('salaryMin');
+        $salaryMax = request('salaryMax');
+        $experience = request('experience');
+        $gender = request('gender');
+        $city = request('city');
+        $address = request('address');
+
+        if (!csrf_verify($csrf_token)) {
+            $result['message'] = 'Có lỗi xảy ra!';
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        if (!$title) {
+            $result['error']['title'] = 'Error.....';
+        }
+
+        if(!$deadline){
+            $result['error']['deadline'] = 'Select deadline!';
+        }
+
+
+        if ($result['error']) {
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        $job->title        = $title;
+        $job->description  = $description;
+        $job->type         = $type;
+        $job->deadline     = $deadline;
+        $job->salary_max   = $salaryMax;
+        $job->salary_min   = $salaryMin;
+        $job->experience   = $experience;
+        $job->gender       = $gender;
+        $job->city         = $city;
+        $job->full_address = $address;
+        $slugNew = ($getJob['title'] != $title) ?  slug($title, 'jobs') : $slug;
+        $job->slug         = $slugNew;
+
+        if ($job->where('id',$getJob['id'])->update()) {
+            $result['status'] = 'success';
+            $result['message'] = 'Update Success!';
+            setSession('error', $result);
+            redirect('manage-jobs/'.$slugNew);
+            return;
+        }
+
+    }
+
+    public function deleteJob(){
+
+        $idJob = request('idJob');
+        $id = getSession('user')['id'];
+
+        if (!$idJob) {
+            return $this->view('errors.404');
+        }
+
+        $job = new job();
+        $getJob = $job->where('id', $idJob)->where('company_id', $id)->getOne();
+
+        if (!$getJob) {
+            return $this->view('errors.404');
+        }
+        $job->where('id', $idJob)->delete();
+        echo json_encode(['success' => 'Delete success!']);
+        return;
+    
     }
     
     public function listResumes(){
         $id = getSession('user')['id'];
         $application = new Application();
-        $listResumes = $application->params(['u.*','cv.file as file', 'u.fullname as name', 'u.avatar as avatar', 'j.title as title'])->join('users u','u.id = a.user_id')->join('jobs j','a.job_id = j.id')->join('cvs cv','cv.user_id = u.id')->where('j.company_id',$id)->get();
-
+        $listResumes = $application->params(['u.*','cv.file as file','a.id as apply_id','a.pay as pay', 'u.fullname as name', 'u.avatar as avatar', 'j.title as title'])->join('users u','u.id = a.user_id')->join('jobs j','a.job_id = j.id')->join('cvs cv','cv.user_id = u.id')->where('j.company_id',$id)->orderBy('a.id')->get();
+        
         return $this->view('user.list-resumes',compact('listResumes'));
     }
 
@@ -215,5 +329,45 @@ class CompanyController extends Controller
         $info = $company->params(['coin'])->where('id', $id)->getOne();
 
         return $this->view('user.wallet', compact('info', 'error'));
+    }
+
+    public function payment(){
+        $id = getSession('user')['id'];
+        $idAp = request('idAp');
+
+        if(!$idAp){
+            return;
+        }
+        
+        $application = new Application();
+        $getInfo = $application->where('id',$idAp)->getOne();
+
+        if($getInfo['pay'] == 1){
+            echo json_encode(['error'=>'Loi roi']);
+            return;
+        }
+
+        $company = new Company();
+        $getCompany = $company->where('id', $id)->getOne();
+
+        if($getCompany['coin'] < 20000){
+            echo json_encode(['error'=>'Your amount is not enough to make the payment.']);
+            return;
+        }
+
+        $coin = $getCompany['coin'] - 20000;
+        $company->coin = $coin;
+        $company->where('id',$id)->update();
+        $application->pay = 1;
+        $application->where('id',$idAp)->update();
+        
+        $cv = new CV();
+        $getCV = $cv->where('id', $getInfo['cv_id'])->getOne();
+
+        $link = APP_CONFIG['uploads'].$getCV['file'];
+        
+        echo json_encode(['success'=>'Payment Successfully.', 'link'=> $link]);
+            return;
+
     }
 }

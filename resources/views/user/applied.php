@@ -27,7 +27,7 @@
                                     </ul>
                                 </div>
                                 <ul class="view_edit_delete_list float-right">
-                                    <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
+                                    <li class="list-inline-item delete-apply" id-ap="<?= $app['id_ap'] ?>"><a href="#" data-toggle="tooltip" data-placement="top" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
                                 </ul>
                             </div>
                         </div>

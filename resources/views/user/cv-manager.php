@@ -10,7 +10,9 @@
                         <h4 class="mb30">CV Manager</h4>
                     </div>
                     <div class="col-lg-12 mb30">
+
                         <div class="candidate_job_reivew cv_manager">
+                        <?= ($error && $error['status'] == 'success') ? '<div class="alert alert-success" role="alert">' . $error['message'] . '</div>' : '' ?>
                             <div class="table-responsive job_review_table">
                                 <table class="table">
                                     <tbody>
@@ -27,7 +29,7 @@
                                                 <td></td>
                                                 <td>
                                                     <ul class="view_edit_delete_list">
-                                                        <li class="list-inline-item"><a href="#" data-toggle="tooltip" data-placement="top" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
+                                                        <li class="list-inline-item delete-cv" id-cv="<?= $cv['id'] ?>"><a href="#" data-toggle="tooltip" data-placement="top" title="Delete"><span class="flaticon-rubbish-bin"></span></a></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -46,9 +48,11 @@
                                 <label class="upload">
                                     <input type="file" name="file" accept=".doc,.docx,.pdf" />
                                     <p><span class="flaticon-download"></span> Select CV</p>
+                                    <span class="text-danger"><?= (isset($error['error']['image'])) ? $error['error']['image'] : '' ?></span>
                                 </label>
                                 <button type="submit" class="btn btn-lg btn-primary ml20">Upload</button>
                             </form>
+                            <span class="text-danger"><?= (isset($error['error']['name'])) ? $error['error']['name'] : '' ?></span>
                             <small class="form-text text-muted">Suitable files are .doc,.docx,.pdf.</small>
                         </div>
                     </div>
