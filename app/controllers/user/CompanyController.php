@@ -8,6 +8,8 @@ use App\Models\Company;
 use App\Models\Application;
 use App\Models\Job;
 
+
+// Huy 
 class CompanyController extends Controller
 {
 

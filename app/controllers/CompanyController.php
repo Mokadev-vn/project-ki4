@@ -9,6 +9,7 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+    // thìn
     public function index()
     {
         $company = new Company();

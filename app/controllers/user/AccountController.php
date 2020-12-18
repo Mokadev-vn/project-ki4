@@ -11,6 +11,7 @@ use App\Models\Application;
 class AccountController extends Controller
 {
 
+    //duy 
     public function index()
     {
         return $this->view('user.dashboard');

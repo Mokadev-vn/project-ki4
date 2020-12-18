@@ -10,12 +10,11 @@ use App\Models\Company;
 class HomeController extends Controller
 {
 
+    // thìn 
     public function index(){   
         $company = new Company();
         
         $listCompany = $company->limit(8)->get();
-
-
         $job = new Job();
         
         $listJob = $job->params(['j.*, c.name as name_company, c.avatar as avatar'])->join('companys c', 'c.id = j.company_id', 'LEFT')->limit(5)->orderBy('id')->get();
@@ -23,7 +22,7 @@ class HomeController extends Controller
         return $this->view('home', compact('listJob', 'listCompany'));
 
     }
-
+    // phát
     public function login()
     {
         $result = [
@@ -107,7 +106,7 @@ class HomeController extends Controller
         echo json_encode($result);
         return;
     }
-
+    //phat
     public function register()
     {
 
@@ -200,6 +199,7 @@ class HomeController extends Controller
 
     }
 
+    //phat
     public function logout()
     {
         if (destroySession('user')) {
@@ -207,6 +207,7 @@ class HomeController extends Controller
         }
     }
 
+    // thìn 
     public function viewJob($slug){
         $job = new Job();
         $company = new Company();
@@ -221,6 +222,7 @@ class HomeController extends Controller
         return $this->view('view-job',compact('infoJob','infoCompany','listJob'));
     }
 
+    //thìn
     public function search(){
         $keywords = request('keywords');
         $local = request('local');
