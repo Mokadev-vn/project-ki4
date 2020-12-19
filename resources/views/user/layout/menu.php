@@ -6,16 +6,16 @@
 				<li><a href="<?= APP_CONFIG['url'] ?>user-profile"><span class="flaticon-profile"></span> Profile</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>applied-jobs"><span class="flaticon-paper-plane"></span> Applied Jobs</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>cv-manager"><span class="flaticon-analysis"></span> CV Manager</a></li>
-				<li><a href="<?= APP_CONFIG['url'] ?>favourite-jobs"><span class="flaticon-favorites"></span> Favourite Jobs</a></li>
-				<li><a href="<?= APP_CONFIG['url'] ?>reviews"><span class="flaticon-rating"></span> Reviews</a></li>
-
+			
 			<?php elseif (getSession('user')['role'] == 2) : ?>
 
 				<li><a href="<?= APP_CONFIG['url'] ?>company-profile"><span class="flaticon-profile"></span> Company Profile</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>new-job"><span class="flaticon-resume"></span> Post a New Job</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>manage-jobs"><span class="flaticon-paper-plane"></span> Manage Jobs</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>list-resumes"><span class="flaticon-analysis"></span> Shortlisted Resumes</a></li>
+				<li><a href="<?= APP_CONFIG['url'] ?>history"><span class="flaticon-clock"></span> History</a></li>
 				<li><a href="<?= APP_CONFIG['url'] ?>wallet"><span class="flaticon-wallet"></span> Wallet</a></li>
+				
 				
 			<?php endif; ?>
 			<li><a href="<?= APP_CONFIG['url'] ?>change-password"><span class="flaticon-locked"></span> Change Password</a></li>

@@ -10,6 +10,13 @@ $router->middleware('falseLogin')->post('/register', 'App\Controllers\HomeContro
 
 $router->middleware('AuthAdmin')->group('/admin',[
     ['GET', '', 'App\Controllers\Admin\HomeController@index'],
+    ['GET', '/user', 'App\Controllers\Admin\HomeController@user'],
+    ['POST', '/user/delete', 'App\Controllers\Admin\HomeController@deleteUser'],
+    ['GET', '/company', 'App\Controllers\Admin\HomeController@company'],
+    ['POST', '/company/delete', 'App\Controllers\Admin\HomeController@deleteCompany'],
+    ['GET', '/job', 'App\Controllers\Admin\HomeController@job'],
+    ['POST', '/job/delete', 'App\Controllers\Admin\HomeController@deleteJob'],
+
 ]);
 
 
@@ -20,6 +27,7 @@ $router->get('/search','App\Controllers\HomeController@search');
 
 $router->middleware('checkLogin')->get('/dashboard', 'App\Controllers\User\AccountController@index');
 $router->middleware('checkLogin')->get('/change-password', 'App\Controllers\User\AccountController@changePassword');
+$router->middleware('checkLogin')->post('/change-password', 'App\Controllers\User\AccountController@postChangePassword');
 
 $router->middleware('User')->get('/user-profile', 'App\Controllers\User\AccountController@profile');
 $router->middleware('User')->post('/user-profile', 'App\Controllers\User\AccountController@postProfile');
@@ -44,6 +52,8 @@ $router->middleware('Company')->post('/manage-jobs/{slug}','App\Controllers\User
 $router->middleware('Company')->get('/list-resumes', 'App\Controllers\User\CompanyController@listResumes');
 
 $router->middleware('Company')->get('/wallet', 'App\Controllers\User\CompanyController@wallet');
+
+$router->middleware('Company')->get('/history', 'App\Controllers\User\CompanyController@history');
 
 $router->middleware('Company')->post('/payment', 'App\Controllers\User\CompanyController@payment');
 

@@ -2,6 +2,6 @@
 namespace App\Models;
 use Core\Model;
 
-class Job extends Model{
+class History extends Model{
     protected $table = 'historys';
 }

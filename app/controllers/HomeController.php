@@ -55,7 +55,7 @@ class HomeController extends Controller
         }
 
         $user = new User();
-        //$data = $user->where('username', strtolower($username))->where('email', $username, '=', 'OR')->getOne();
+       
         $data = $user->where('email', $username)->getOne();
 
         $data = (is_array($data)) ? $data : [];

@@ -132,7 +132,7 @@ $(document).ready(function () {
       confirmButtonText: "Delete!",
     }).then(function (result) {
       if (result.value) {
-        $.post(URL + "cv-manager/delete",{idCV}, function (data, status) {
+        $.post(URL + "cv-manager/delete", { idCV }, function (data, status) {
           data = JSON.parse(data);
           console.log(data);
           if (data.error) {
@@ -140,9 +140,9 @@ $(document).ready(function () {
             return;
           }
           swal("Success!", data.success, "success");
-          setTimeout(function() {
+          setTimeout(function () {
             window.reload();
-          }, 2500)
+          }, 2500);
         });
       }
     });
@@ -163,7 +163,7 @@ $(document).ready(function () {
       confirmButtonText: "Delete!",
     }).then(function (result) {
       if (result.value) {
-        $.post(URL + "applied/delete",{idAp}, function (data, status) {
+        $.post(URL + "applied/delete", { idAp }, function (data, status) {
           data = JSON.parse(data);
           console.log(data);
           if (data.error) {
@@ -171,9 +171,9 @@ $(document).ready(function () {
             return;
           }
           swal("Success!", data.success, "success");
-          setTimeout(function() {
+          setTimeout(function () {
             window.reload();
-          }, 2500)
+          }, 2500);
         });
       }
     });
@@ -194,7 +194,7 @@ $(document).ready(function () {
       confirmButtonText: "Delete!",
     }).then(function (result) {
       if (result.value) {
-        $.post(URL + "manage-jobs/delete",{idJob}, function (data, status) {
+        $.post(URL + "manage-jobs/delete", { idJob }, function (data, status) {
           data = JSON.parse(data);
           console.log(data);
           if (data.error) {
@@ -202,13 +202,107 @@ $(document).ready(function () {
             return;
           }
           swal("Success!", data.success, "success");
-          setTimeout(function() {
+          setTimeout(function () {
             window.reload();
-          }, 2500)
+          }, 2500);
         });
       }
     });
   });
+
+  $(".delete-user").click(function () {
+    let idUser = $(this).attr("id-user");
+    if (!idUser) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete User!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "admin/user/delete", { idUser }, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function () {
+            window.reload();
+          }, 2500);
+        });
+      }
+    });
+  });
+
+  $(".delete-company").click(function () {
+    let idUser = $(this).attr("id-user");
+    if (!idUser) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete Company!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "admin/company/delete", { idUser }, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function () {
+            window.reload();
+          }, 2500);
+        });
+      }
+    });
+  });
+
+  $(".delete-job-admin").click(function () {
+    let idJob = $(this).attr("id-user");
+    if (!idJob) {
+      return;
+    }
+    swal({
+      title: "Are you sure?",
+      text: "Do you want to delete Job!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then(function (result) {
+      if (result.value) {
+        $.post(URL + "admin/job/delete", { idJob }, function (data, status) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (data.error) {
+            swal("Error!", data.error, "warning");
+            return;
+          }
+          swal("Success!", data.success, "success");
+          setTimeout(function () {
+            window.reload();
+          }, 2500);
+        });
+      }
+    });
+  });
+
   inputDeadline.min = new Date().toISOString().split("T")[0];
 });
 

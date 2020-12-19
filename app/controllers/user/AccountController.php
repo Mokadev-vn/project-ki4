@@ -7,6 +7,7 @@ use App\Models\CV;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Application;
+use App\Models\Company;
 
 class AccountController extends Controller
 {
@@ -14,7 +15,27 @@ class AccountController extends Controller
     //duy 
     public function index()
     {
-        return $this->view('user.dashboard');
+        $id = getSession('user')['id'];
+        $role = getSession('user')['role'];
+        if ($role == 1) {
+            $application = new Application();
+            $listAp = $application->params(['j.*', 'a.id as id_app'])->join('jobs j', 'j.id = a.job_id')->where('user_id', $id)->limit(8)->get();
+            $countAp = count($application->where('user_id', $id)->get());
+            return $this->view('user.dashboard', compact('countAp', 'listAp'));
+        }
+
+        if ($role == 2) {
+            $job = new Job();
+            $application = new Application();
+
+            $headJob = $job->params(['count(id) as job_total', 'count(if(active = 1,1,null)) as active_total'])->where('company_id', $id)->getOne();
+            $apply   = $application->params(['count(a.id) as total'])->join('jobs j', 'j.id = a.job_id')->where('j.company_id', $id)->getOne();
+
+            $listResumes = $application->params(['u.*', 'cv.file as file', 'a.id as apply_id', 'a.pay as pay', 'u.fullname as name', 'u.avatar as avatar', 'j.title as title'])->join('users u', 'u.id = a.user_id')->join('jobs j', 'a.job_id = j.id')->join('cvs cv', 'cv.user_id = u.id')->where('j.company_id', $id)->orderBy('a.id')->get();
+
+            return $this->view('user.dashboard', compact('headJob', 'apply','listResumes'));
+        }
+        return $this->view('error.404');
     }
 
     public function profile()
@@ -235,9 +256,78 @@ class AccountController extends Controller
 
     public function changePassword()
     {
-        $id = getSession('user')['id'];
-        $user = new User();
+        $error = getSession('error');
+        destroySession('error');
 
-        return $this->view('user.change-password');
+        return $this->view('user.change-password', compact('error'));
+    }
+
+    public function postChangePassword()
+    {
+        $id = getSession('user')['id'];
+        $role = getSession('user')['role'];
+
+        $users = new User();
+        $company = new Company();
+
+        $user = ($role == 1) ? $users : $company;
+
+        $result = [
+            'status' => 'error',
+            'message' => '',
+            'error' => false
+        ];
+
+        $csrf_token = request('csrf_token');
+        $password = request('password');
+        $oldPassword = request('oldPassword');
+        $cfPassword = request('cfPassword');
+
+        if (!csrf_verify($csrf_token)) {
+            $result['message'] = 'Có lỗi xảy ra!';
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        if (!$password) {
+            $result['error']['new'] = 'Vui lòng nhập password mới';
+        }
+
+        if (!$oldPassword) {
+            $result['error']['old'] = 'Vui lòng nhập password cũ';
+        }
+
+        if ($password != $cfPassword) {
+            $result['error']['confirm'] = 'Không trùng password';
+        }
+
+
+        if ($result['error']) {
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+
+        $get = $user->where('id', $id)->getOne();
+
+        if (!password_verify($oldPassword, $get['password'])) {
+            $result['message'] = "Password cũ không chính xác !";
+            setSession('error', $result);
+            back();
+            return;
+        }
+
+        $password = password_hash($password, PASSWORD_BCRYPT);
+
+        $user->password = $password;
+        $user->where('id', $id)->update();
+
+        $result['status'] = 'success';
+        $result['message'] = "UPDATE password successfully";
+        setSession('error', $result);
+        redirect('change-password');
+        return;
     }
 }

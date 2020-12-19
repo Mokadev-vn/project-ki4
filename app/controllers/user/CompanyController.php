@@ -7,7 +7,8 @@ use App\Models\CV;
 use App\Models\Company;
 use App\Models\Application;
 use App\Models\Job;
-
+use App\Models\Payment;
+use App\Models\History;
 
 // Huy 
 class CompanyController extends Controller
@@ -116,9 +117,8 @@ class CompanyController extends Controller
         $job = new Job();
         $application = new Application();
 
-        $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
+        // $listJob = $job->params(['j.*','count(a.id) as total'])->join('applications a', 'a.job_id = j.id','LEFT')->where('j.company_id', $id)->groupBy('j.id')->orderBy('j.id')->get();
         $headJob = $job->params(['count(id) as job_total', 'count(if(active = 1,1,null)) as active_total'])->where('company_id', $id)->getOne();
-
         $apply   = $application->params(['count(a.id) as total'])->join('jobs j','j.id = a.job_id')->where('j.company_id', $id)->getOne();
         return $this->view('user.post-job', compact('error','headJob','apply'));
     }
@@ -328,9 +328,13 @@ class CompanyController extends Controller
         destroySession('error');
         
         $company = new Company();
-        $info = $company->params(['coin'])->where('id', $id)->getOne();
 
-        return $this->view('user.wallet', compact('info', 'error'));
+        $info = $company->params(['coin'])->where('id', $id)->getOne();
+        $payment = new Payment();
+        
+        $listPayment = $payment->where('company_id', $id)->where('status',1)->get();
+
+        return $this->view('user.wallet', compact('info', 'error', 'listPayment'));
     }
 
     public function payment(){
@@ -345,7 +349,7 @@ class CompanyController extends Controller
         $getInfo = $application->where('id',$idAp)->getOne();
 
         if($getInfo['pay'] == 1){
-            echo json_encode(['error'=>'Loi roi']);
+            echo json_encode(['error'=>'Error']);
             return;
         }
 
@@ -360,9 +364,20 @@ class CompanyController extends Controller
         $coin = $getCompany['coin'] - 20000;
         $company->coin = $coin;
         $company->where('id',$id)->update();
+
         $application->pay = 1;
         $application->where('id',$idAp)->update();
         
+        $history = new History();
+
+        $history->company_id = $id;
+        $history->apply_id = $idAp;
+        $history->coin = 20000;
+        $history->message = "Payment CV ".$getInfo['cv_id'];
+        $history->status = 1;
+        $history->create_at = now();
+        $history->save();
+
         $cv = new CV();
         $getCV = $cv->where('id', $getInfo['cv_id'])->getOne();
 
@@ -371,5 +386,12 @@ class CompanyController extends Controller
         echo json_encode(['success'=>'Payment Successfully.', 'link'=> $link]);
             return;
 
+    }
+
+    public function history(){
+        $id = getSession('user')['id'];
+        $history = new History();
+        $listHistory = $history->where('company_id', $id)->orderBy('id')->get();
+        return $this->view('user.history', compact('listHistory'));
     }
 }
